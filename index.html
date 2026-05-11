@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)file:///Users/ryanpetrello/Downloads/The-Integrated-Element-Lattice_3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080a10">
+<meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>The Integrated Element Lattice</title>
+<style>
+:root{
+  --bg:#080a10; --bg2:#0d1018; --card:#111522; --card2:#151a29; --rule:#293044;
+  --text:#f2f4fb; --muted:#b7bed2; --dim:#7d879f; --faint:#4b556c;
+  --ime:#72c7ff; --cyb:#d3a6ff; --green:#6ee7b7; --gold:#ffd166; --rose:#ff8fa3; --orange:#ffb86b;
+  --blue:#83b6ff; --violet:#b9a4ff; --shadow:0 18px 60px rgba(0,0,0,.35); --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 800px at 20% -10%,rgba(211,166,255,.13),transparent 55%),radial-gradient(1000px 700px at 90% 10%,rgba(114,199,255,.10),transparent 50%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit}
+.wrap{width:min(1500px,calc(100% - 36px));margin:0 auto}
+.hero{padding:64px 0 30px;text-align:center}
+.eyebrow{font:800 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.18em;color:var(--cyb);margin-bottom:14px}
+.hero h1{margin:0;font-size:clamp(42px,8vw,82px);line-height:1.10;letter-spacing:-.055em;background:linear-gradient(120deg,#fff 0%,#e7dcff 45%,#8bd5ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{max-width:820px;margin:22px auto 0;color:var(--muted);font-size:clamp(15px,2.2vw,18px)}
+.hero .mini{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);background:rgba(255,255,255,.035);border-radius:999px;padding:6px 10px;color:var(--muted);font:800 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.08em}
+.pill.ime{border-color:rgba(114,199,255,.32);color:var(--ime);background:rgba(114,199,255,.08)}
+.pill.cyb{border-color:rgba(211,166,255,.34);color:var(--cyb);background:rgba(211,166,255,.08)}
+.topnav{position:sticky;top:0;z-index:50;background:rgba(8,10,16,.78);backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid var(--rule)}
+.topnav .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;overflow:hidden}
+.topnav button{width:100%;padding:14px 8px;border:0;background:transparent;color:var(--dim);font:900 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;border-bottom:2px solid transparent;cursor:pointer;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+.topnav button:hover,.topnav button.active{color:var(--text);background:rgba(255,255,255,.035);border-bottom-color:rgba(211,166,255,.7)}
+section{padding:48px 0;border-bottom:1px solid rgba(255,255,255,.06);scroll-margin-top:62px}
+.sectionHead{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:22px}
+.sectionTag{font:900 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--cyb);letter-spacing:.14em;text-transform:uppercase}
+.sectionHead h2{font-size:clamp(26px,4vw,42px);letter-spacing:-.04em;line-height:1.08;margin:0}
+.sectionHead p{margin:0;max-width:880px;color:var(--muted);font-size:15px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid2>*,.grid3>*,.talanovGrid>*,.presenceLayout>*{min-width:0}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012)),var(--card);border:1px solid var(--rule);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);min-width:0}
+.card h3{margin:0 0 8px;font-size:18px;letter-spacing:-.015em}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.stat{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.stat .big{font-size:44px;font-weight:950;letter-spacing:-.08em;line-height:.9}
+.stat small{display:block;color:var(--dim);font:900 10px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
+.rowCard{display:grid;grid-template-columns:160px 1fr;gap:14px;align-items:start;border:1px solid var(--rule);border-radius:14px;padding:13px;background:rgba(255,255,255,.025)}
+.rowCard b{font-size:13px}
+.rowCard span{color:var(--muted);font-size:13px}
+.callout{border:1px solid rgba(255,209,102,.35);background:linear-gradient(180deg,rgba(255,209,102,.11),rgba(255,209,102,.03));border-radius:16px;padding:16px;color:#ffe6a3}
+.callout strong{color:#fff1bd}
+.latticeLayout{display:grid;grid-template-columns:minmax(560px,1fr) minmax(360px,480px);gap:18px;align-items:start}
+.latticeScroll{overflow:visible}
+.latticeGrid{width:100%;display:grid;grid-template-columns:minmax(96px,124px) repeat(4,minmax(96px,1fr));gap:8px}
+.corner,.axisHead,.aspectHead{border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.025);min-height:58px;display:flex;align-items:center;justify-content:center;text-align:center}
+.corner{color:var(--dim);font:900 10px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.12em;flex-direction:column;gap:5px;align-items:flex-start;text-align:left;padding:10px 12px}
+.aspectHead{flex-direction:column}
+.aspectHead b{font-size:17px;line-height:1.08;letter-spacing:-.02em}
+.aspectHead span,.axisHead span{font:900 9px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.axisHead{justify-content:flex-start;text-align:left;padding:12px;flex-direction:column;align-items:flex-start}
+.axisHead b{font-size:15px;line-height:1;color:var(--text)}
+button.elCell{border:1px solid var(--rule);border-radius:14px;min-height:88px;padding:10px;background:var(--card2);color:var(--text);text-align:left;cursor:pointer;transition:.16s transform,.16s border-color,.16s background;position:relative;overflow:hidden}
+button.elCell:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.22)}
+button.elCell.selected{outline:2px solid rgba(255,255,255,.15);border-color:currentColor}
+.elCell.ime{color:var(--ime);background:linear-gradient(135deg,rgba(114,199,255,.16),rgba(114,199,255,.025)),var(--card2)}
+.elCell.cyb{color:var(--cyb);background:linear-gradient(135deg,rgba(211,166,255,.18),rgba(211,166,255,.025)),var(--card2)}
+.elSym{font:950 25px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:-.04em}
+.elKind{margin-top:8px;font:900 9px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.elNameTiny{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.25}
+.detail{position:sticky;top:76px}
+.detail .titleRow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.detail .badgeSym{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;font:950 24px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.05);border:1px solid var(--rule);flex:none}
+.detail h3{font-size:22px;margin:0;line-height:1.08}
+.labelInline{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.primaryName{white-space:nowrap}
+.microLabel{font-size:12px;color:var(--muted);font-style:italic;font-weight:600}
+.detail .subtitle{display:grid;gap:3px;margin-top:5px}
+.detail .kindLine{font:900 10px/1.15 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);text-transform:uppercase;letter-spacing:.13em}
+.detail .placementLine{font:850 10px/1.42 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;white-space:pre-line}
+.chipRows{display:grid;gap:7px;margin:12px 0}
+.chipLine{display:flex;flex-wrap:wrap;gap:6px}
+.chipLine.taxonomy{padding-top:1px}
+.chip{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.035);padding:5px 8px;border-radius:999px;color:var(--muted);font:800 11px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace}
+.chip.strong{color:var(--text);background:rgba(255,255,255,.06)}
+.detailBlock{border-top:1px solid rgba(255,255,255,.07);padding-top:13px;margin-top:13px}
+.detailBlock h4{margin:0 0 6px;color:var(--text);font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.detailBlock p{margin:0;color:var(--muted);font-size:13px}
+.table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.02)}
+.table th,.table td{padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;text-align:left;font-size:13px}
+.table th{color:var(--text);font:900 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.09em;background:rgba(255,255,255,.04)}
+.table tr:last-child td{border-bottom:0}
+.table td{color:var(--muted)}
+.table b{color:var(--text)}
+details{border:1px solid var(--rule);border-radius:16px;background:rgba(255,255,255,.025);overflow:hidden}
+details+details{margin-top:10px}
+summary{list-style:none;cursor:pointer;padding:15px 17px;font-weight:950;letter-spacing:-.015em;display:flex;justify-content:space-between;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font:950 18px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim)}
+details[open] summary:after{content:"−"}
+.detailsBody{padding:0 17px 17px}
+.dichList{columns:2;column-gap:24px;margin:0;padding-left:20px}
+.dichList li{break-inside:avoid;margin:0 0 7px;color:var(--muted);font-size:13px}
+.dichList b{color:var(--text)}
+.dichList .alt{color:var(--dim);font-size:12px}
+
+.reininGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.reininCol{border:1px solid rgba(255,255,255,.075);border-radius:14px;background:linear-gradient(160deg,rgba(255,255,255,.035),rgba(255,255,255,.012));padding:13px 14px;min-height:160px}
+.reininCol h4{margin:0 0 9px;font-size:12px;color:var(--text);letter-spacing:-.01em}
+.reininCol h4 span{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:7px;margin-right:6px;background:rgba(211,166,255,.10);color:var(--cyb);font:900 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace}
+.reininCol ol{margin:0;padding-left:18px}
+.reininCol li{margin:0 0 7px;color:var(--muted);font-size:12px;break-inside:avoid}
+.reininCol li b{color:var(--text)}
+.reininCol li em{color:var(--dim)}
+.reininCol .alt{display:block;color:var(--dim);font-size:11px;line-height:1.35;margin-top:1px}
+.minaievSplit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.minaievPanel{border:1px solid rgba(255,255,255,.075);border-radius:14px;background:linear-gradient(160deg,rgba(255,255,255,.035),rgba(255,255,255,.012));padding:13px 14px}
+.minaievPanel h4{margin:0 0 9px;font-size:13px;color:var(--text);letter-spacing:-.01em}
+.minaievPanel h4 span{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:7px;margin-right:7px;background:rgba(211,166,255,.10);color:var(--cyb);font:900 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace}
+.minaievPanel ol{margin:0;padding-left:18px}
+.minaievPanel li{margin:0 0 8px;color:var(--muted);font-size:13px}
+.minaievPanel li b{color:var(--text)}
+.minaievPanel .alt{display:block;color:var(--dim);font-size:11px;line-height:1.35;margin-top:1px}
+.matrixGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.matrixCard{border:1px solid var(--rule);border-radius:16px;padding:15px;background:linear-gradient(145deg,rgba(211,166,255,.055),rgba(114,199,255,.028),rgba(255,255,255,.018));position:relative;overflow:hidden}
+.matrixCard h4{margin:0 0 3px;font-size:15px;color:var(--text);letter-spacing:-.01em}
+.matrixCard .miniMatrix{display:grid;grid-template-columns:minmax(105px,.9fr) repeat(2,minmax(0,1fr));border:1px solid rgba(255,255,255,.075);border-radius:12px;overflow:hidden;background:rgba(0,0,0,.10)}
+.matrixCard .miniMatrix div{padding:8px 9px;border-right:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);font-size:12px;color:var(--muted);min-height:34px;display:flex;align-items:center}
+.matrixCard .miniMatrix div:nth-child(3n){border-right:0}
+.matrixCard .miniMatrix div:nth-last-child(-n+3){border-bottom:0}
+.matrixCard .headCell{font:900 9px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim)!important;text-transform:uppercase;letter-spacing:.08em;background:rgba(255,255,255,.035)}
+.matrixCard .cornerCell{justify-content:center;text-align:center;align-items:center;line-height:1.2;background:linear-gradient(160deg,rgba(211,166,255,.12),rgba(255,255,255,.04));color:var(--cyb)!important;white-space:nowrap;font-size:12px!important;letter-spacing:.015em!important;font-weight:900}
+.coordIntro{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 12px}
+.coordTile{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:15px 16px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018))}
+.coordTile:before{content:"";position:absolute;inset:-50% auto auto -10%;width:160px;height:160px;border-radius:999px;background:radial-gradient(circle,rgba(211,166,255,.12),transparent 70%);pointer-events:none}
+.coordTile b{display:block;font-size:15px;margin-bottom:6px;color:var(--text)}
+.coordTile span{display:block;color:var(--muted);font-size:13px;line-height:1.55;position:relative}
+.coordKicker{display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--cyb);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.coordKicker span{display:inline-flex;border:1px solid rgba(211,166,255,.28);background:rgba(211,166,255,.08);border-radius:999px;padding:3px 8px;font:900 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--cyb)}
+.coordKicker em{font-size:11px;line-height:1;font-style:normal;font-weight:800;letter-spacing:.02em;color:var(--cyb);text-transform:uppercase;opacity:.94}
+.matrixCard:before{content:"";position:absolute;inset:-80px -80px auto auto;width:150px;height:150px;border-radius:999px;background:radial-gradient(circle,rgba(211,166,255,.10),transparent 70%);pointer-events:none}
+.matrixCard h4{position:relative}
+.matrixCard .coordText{position:relative;color:var(--dim);font-size:11px;line-height:1.45;margin:0 0 11px}
+.mappingGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.mapCard{border:1px solid var(--rule);border-radius:14px;padding:14px;background:rgba(255,255,255,.025);min-height:140px;display:flex;flex-direction:column;gap:5px}
+.mapCard .sym{font:950 30px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--cyb)}
+.mapCard b{font-size:14px}
+.mapCard em{font-size:11px;color:var(--muted)}
+.mapCard span{margin-top:auto;font:900 10px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;white-space:pre-line}
+
+.equivalenceCard{margin-top:14px}
+.compareGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.basisPanel{border:1px solid rgba(255,255,255,.075);border-radius:16px;background:linear-gradient(160deg,rgba(255,255,255,.035),rgba(255,255,255,.012));padding:14px}
+.basisPanel h4{margin:0 0 10px;font-size:14px;letter-spacing:-.01em}
+.basisRows{display:grid;gap:6px}
+.basisRow{display:grid;grid-template-columns:46px 1fr;gap:10px;align-items:center;border:1px solid rgba(255,255,255,.06);border-radius:11px;background:rgba(0,0,0,.12);padding:7px 9px}
+.basisRow .lhs{font:950 16px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--text)}
+.basisRow .rhs{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.token{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.10);border-radius:999px;padding:3px 7px;font:900 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);background:rgba(255,255,255,.035)}
+.token.ime{color:var(--ime);border-color:rgba(114,199,255,.25);background:rgba(114,199,255,.075)}
+.token.cyb{color:var(--cyb);border-color:rgba(211,166,255,.25);background:rgba(211,166,255,.075)}
+.structuralNote{margin-top:14px;border:1px solid rgba(211,166,255,.22);border-radius:15px;padding:13px 15px;background:linear-gradient(160deg,rgba(211,166,255,.08),rgba(114,199,255,.035));color:var(--muted);font-size:13px;line-height:1.55}
+.talanovGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);gap:14px;align-items:stretch;margin-top:14px}
+.talanovMatrixCard{grid-column:1;grid-row:1}
+.talanovRankCard{grid-column:2;grid-row:1 / span 2;align-self:stretch;display:flex;flex-direction:column}
+.modelGSection{grid-column:1;grid-row:2}
+.statScroll{overflow-x:auto;max-width:100%;width:100%;-webkit-overflow-scrolling:touch;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(0,0,0,.10)}
+.talanovTable{border-collapse:collapse;min-width:900px;width:100%;font-size:10.5px}
+.talanovTable th,.talanovTable td{border-bottom:1px solid rgba(255,255,255,.065);border-right:1px solid rgba(255,255,255,.045);padding:5px 6px;text-align:center;white-space:nowrap}
+.talanovTable th{font:900 10px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;background:rgba(255,255,255,.035)}
+.talanovTable th:first-child,.talanovTable td:first-child{position:sticky;left:0;z-index:1;background:rgba(17,21,34,.96);text-align:left;color:var(--text);font-weight:900}
+.talanovTable tr:last-child td{border-bottom:0}
+.statHeat.pos{background:rgba(114,199,255,var(--a))}
+.statHeat.neg{background:rgba(255,143,163,var(--a))}
+.statHeat.zero{background:rgba(255,255,255,.025)}
+.rankList{display:grid;gap:7px;margin-top:12px}
+.rankRow{display:grid;grid-template-columns:28px 44px minmax(0,1fr) 58px;gap:9px;align-items:center;border:1px solid rgba(255,255,255,.075);border-radius:12px;padding:8px 10px;background:rgba(255,255,255,.024)}
+.rankRow .rank{font:900 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim)}
+.rankRow .sym{font:950 20px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--cyb)}
+.rankRow .meta{min-width:0}
+.rankRow .head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:7px}
+.rankRow .meta b{display:block;font-size:12px;color:var(--text);line-height:1.15;min-width:0}
+.rankRow .meta span{display:block;font:850 9px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+.rankRow .coef{font:950 15px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);text-align:right}
+.rankBadge{display:inline-flex;align-items:center;gap:5px;padding:3px 7px;border-radius:999px;font:900 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;border:1px solid transparent}
+.rankBadge.block{font-weight:950}
+.rankBadge.blue{background:rgba(114,199,255,.12);border-color:rgba(114,199,255,.30);color:#8fd3ff}
+.rankBadge.green{background:rgba(145,230,173,.12);border-color:rgba(145,230,173,.28);color:#aaf3bf}
+.rankBadge.yellow{background:rgba(255,214,102,.12);border-color:rgba(255,214,102,.30);color:#ffd970}
+.rankBadge.red{background:rgba(255,143,163,.12);border-color:rgba(255,143,163,.28);color:#ffb0c2}
+.modelGGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.gCard{border:1px solid rgba(255,255,255,.075);border-radius:16px;background:linear-gradient(155deg,rgba(255,255,255,.035),rgba(255,255,255,.012));padding:14px}
+.gTop{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px}
+.gPair{display:flex;gap:6px;align-items:center}
+.gPair .token{font-size:12px;padding:5px 8px}
+.gLabels{font-size:12px;color:var(--muted)}
+.gLabels b{color:var(--text)}
+.gMini{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden}
+.gMini span{min-height:40px;display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);font:950 17px/1 ui-monospace,SFMono-Regular,Menlo,monospace}
+.gMini span:nth-child(4n){border-right:0}
+.gMini span:nth-last-child(-n+4){border-bottom:0}
+.gMini .on{color:var(--text);background:rgba(255,255,255,.10)}
+.gMini .off{color:rgba(255,255,255,.50);background:rgba(0,0,0,.20);font-style:italic}
+.formulaStrip{margin-top:14px;border:1px solid rgba(211,166,255,.22);border-radius:14px;background:rgba(211,166,255,.055);padding:12px 14px;text-align:center;font:950 15px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--text)}
+.crucialNote{margin-top:auto;border:1px solid rgba(110,231,183,.28);border-radius:14px;background:linear-gradient(160deg,rgba(110,231,183,.12),rgba(110,231,183,.035));padding:12px 13px;color:var(--text);font:900 12px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.045em;text-transform:uppercase;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.crucialNote strong{color:var(--green)}
+
+
+.example{display:grid;grid-template-columns:1fr;gap:14px}
+.miniStack{display:grid;grid-template-columns:repeat(8,minmax(44px,1fr));gap:6px;max-width:760px}
+.posBox{border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px 6px;background:rgba(255,255,255,.025);text-align:center}
+.posBox .pos{font:900 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim)}
+.posBox .val{font:950 17px/1 ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:4px}
+.presenceCard{margin-top:14px}
+.modeBtns{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.modeBtns button{border:1px solid var(--rule);background:rgba(255,255,255,.03);color:var(--muted);border-radius:999px;padding:8px 12px;font:900 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
+.modeBtns button.active{color:var(--text);border-color:rgba(211,166,255,.55);background:rgba(211,166,255,.10)}
+.presenceLayout{display:grid;grid-template-columns:minmax(360px,520px) 1fr;gap:16px;align-items:start}
+.presenceViz{border:1px solid rgba(255,255,255,.07);border-radius:16px;background:radial-gradient(600px 400px at 50% 0%,rgba(211,166,255,.07),transparent 65%),rgba(0,0,0,.14);padding:12px}
+.presenceViz svg{width:100%;height:auto;display:block}
+.presenceInfo{display:grid;gap:8px}
+.presenceInfo .modeTitle{border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:12px 14px;background:rgba(255,255,255,.025)}
+.presenceInfo .modeTitle b{display:block;font-size:18px;letter-spacing:-.02em}
+.presenceInfo .modeTitle span{font:900 10px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.presenceInfo .modeTitle p{margin:8px 0 0;color:var(--muted);font-size:13px}
+.blockChip{border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(255,255,255,.025);padding:10px 12px;display:grid;grid-template-columns:190px 1fr;gap:14px}
+.blockChip .code{font:900 11px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);text-transform:uppercase;white-space:pre-line}
+.blockChip b{font-size:14px}
+.blockChip p{margin:2px 0 0;color:var(--muted);font-size:12px;line-height:1.45}
+.sourceFoot{padding:26px 0 60px;color:var(--dim);font-size:12px}
+.sourceFoot strong{color:var(--muted)}
+.sourceList{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sourceList span{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);border-radius:999px;padding:6px 10px;color:var(--muted);font:800 10px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.08em}
+@media(max-width:1240px){.talanovGrid{grid-template-columns:1fr}.talanovMatrixCard,.talanovRankCard,.modelGSection{grid-column:auto;grid-row:auto}.talanovRankCard{display:block}.crucialNote{margin-top:12px}}
+@media(max-width:980px){.latticeLayout,.presenceLayout,.grid2{grid-template-columns:1fr}.detail{position:relative;top:0}.mappingGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.reininGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.minaievSplit{grid-template-columns:1fr}}
+@media(max-width:800px){.grid2,.grid3,.example,.matrixGrid,.coordIntro,.compareGrid,.modelGGrid{grid-template-columns:1fr}.mappingGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.rowCard{grid-template-columns:1fr}.dichList{columns:1}.hero{text-align:left}.hero .mini{justify-content:flex-start}}
+@media(max-width:620px){.wrap{width:min(calc(100% - 20px),720px)}section{padding:38px 0}.latticeGrid{grid-template-columns:minmax(54px,64px) repeat(4,minmax(0,1fr));gap:5px}.corner,.axisHead,.aspectHead{min-height:48px;border-radius:9px}.corner{font-size:7px;letter-spacing:.06em;padding:7px 6px}.axisHead{padding:6px 5px}.axisHead b{font-size:11px}.axisHead span,.aspectHead span{font-size:7px;letter-spacing:.04em}.aspectHead b{font-size:12px;line-height:1.05}button.elCell{min-height:68px;padding:7px 5px;border-radius:10px}.elSym{font-size:20px}.elKind{display:none}.elNameTiny{font-size:9px;line-height:1.15}.detail .titleRow{align-items:flex-start}.detail .badgeSym{width:48px;height:48px;border-radius:13px;font-size:21px}.detail h3{font-size:18px}.mappingGrid{grid-template-columns:1fr}.miniStack{grid-template-columns:repeat(4,1fr)}.card{padding:16px}.topnav button{font-size:9px;padding:12px 2px;letter-spacing:.04em}.hero h1{font-size:clamp(40px,13vw,64px)}.blockChip{grid-template-columns:1fr}.reininGrid{grid-template-columns:1fr}.talanovGrid{gap:12px}.rankRow{grid-template-columns:24px 40px minmax(0,1fr) 52px;padding:8px 9px}.rankRow .head{gap:6px}.rankRow .meta b{font-size:11.5px}.rankRow .meta span{font-size:8.5px}.rankBadge{font-size:8px;padding:3px 6px}.matrixCard .miniMatrix{grid-template-columns:minmax(88px,.82fr) repeat(2,minmax(0,1fr))}.matrixCard .miniMatrix div{padding:7px 7px;font-size:11px;min-height:32px}.matrixCard .headCell{font-size:9px!important;letter-spacing:.035em}.matrixCard .cornerCell{font-size:10px!important;letter-spacing:.01em!important;white-space:nowrap}}
+</style>
+</head>
+<body>
+<header class="hero wrap">
+  <div class="eyebrow">Model A+B · Reinin+Minaiev Trait Space · Mirage+Semi-Dual Integration</div>
+  <h1>The Integrated Element Lattice</h1>
+  <p class="sub">Eight Classical Elements and eight Integrated Elements in one aspect × axis grid. Classical Elements describe the main aspect × axis cells; Integrated Elements describe the cross-order cells that explain Mirage/Semi-Dual grammar and Model-B resonance.</p>
+  <div class="mini"><span class="pill ime">8 Classical Elements</span><span class="pill cyb">8 Integrated Elements</span><span class="pill">16 + 8 Dichotomies</span><span class="pill">Aspect × Axis lattice</span></div>
+</header>
+<nav class="topnav" aria-label="Section navigation"><div class="wrap">
+  <button type="button" data-target="orientation" class="">Orientation</button>
+  <button type="button" data-target="lattice" class="">Lattice</button>
+  <button type="button" data-target="spaces" class="">Spaces</button>
+  <button type="button" data-target="typing" class="active">Typing Use</button>
+</div></nav>
+<main class="wrap">
+<section id="orientation">
+  <div class="sectionHead">
+    <div class="sectionTag">Orientation</div>
+    <h2>Two Element Layers, Three Coordinate Layers</h2>
+    <p>Integrated Elements are not extra functions. They are Model-B / Minaiev cross-order coordinates: aspect domains crossed with value-axes that Classical Elements do not occupy.</p>
+  </div>
+  <div class="grid3">
+    <div class="card stat"><div class="big" style="color:var(--ime)">16</div><div><small>Element cells</small><p>8 Classical Elements plus 8 Integrated Elements in a single aspect × axis lattice.</p></div></div>
+    <div class="card stat"><div class="big" style="color:var(--gold)">24</div><div><small>Correct count</small><p>16 Reinin-space dichotomies, including Identity / Valid-Null, + 8 Minaiev-only coordinates.</p></div></div>
+    <div class="card stat"><div class="big" style="color:var(--cyb)">23</div><div><small>Effective discriminators</small><p>Identity completes the algebra, but only the other 23 divide types in a typing-relevant way.</p></div></div>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card">
+      <h3>Classical Elements</h3>
+      <p>Classical Elements occupy same-order cells: irrational aspects pair with irrational axes, and rational aspects pair with rational axes. Example: <strong>N × Judicious = Ne</strong>, <strong>N × Decisive = Ni</strong>, <strong>T × Merry = Ti</strong>, <strong>T × Serious = Te</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>Integrated Elements</h3>
+      <p>Integrated Elements occupy cross-order cells: irrational aspects pair with rational axes, and rational aspects pair with irrational axes. Example: <strong>N × Merry = N?</strong>, <strong>N × Serious = N!</strong>, <strong>T × Judicious = T?</strong>, <strong>T × Decisive = T!</strong>.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h3>Keep the Layers Separate</h3>
+    <div style="display:grid;gap:10px">
+      <div class="rowCard"><b>Element Layer</b><span>Classical Elements and Integrated Elements. Each cell is described by five poles: three orbital poles, one aspect pole, and one axis pole.</span></div>
+      <div class="rowCard"><b>Position Layer</b><span>Model-A positions and position dichotomies such as Strong/Weak, Valued/Subdued, Bold/Cautious, Inert/Contact, Mental/Vital, Evaluatory/Situational, and Accepting/Producing.</span></div>
+      <div class="rowCard"><b>Type Trait Layer</b><span>Reinin and Minaiev spaces. These divide the 16 types; they should not be mixed up with element coordinates or position dichotomies.</span></div>
+    </div>
+  </div>
+</section>
+<section id="lattice">
+  <div class="sectionHead">
+    <div class="sectionTag">Lattice</div>
+    <h2>Aspect x Axis Lattice of 16 Elements</h2>
+    <p>Columns are aspects: Intuition, Sensing, Logic, Ethics. Rows are quadra-value axes: Judicious, Decisive, Merry, Serious. The perceptual axes sit above the judging axes, so the grid reads P above J.</p>
+  </div>
+  <div class="latticeLayout">
+    <div class="latticeScroll"><div class="latticeGrid" id="latticeGrid" aria-label="Aspect by Axis element lattice"><div class="corner"><span>Aspect →</span><span>Axis ↓</span></div><div class="aspectHead"><b>Intuition</b><span>Ne/Ni</span></div><div class="aspectHead"><b>Sensing</b><span>Se/Si</span></div><div class="aspectHead"><b>Logic</b><span>Te/Ti</span></div><div class="aspectHead"><b>Ethics</b><span>Fe/Fi</span></div><div class="axisHead"><b>Judicious</b><span>Ne/Si axis</span></div><button class="elCell ime" data-el="Ne" type="button" aria-label="Ne Extraverted Intuition"><div class="elSym">Ne</div><div class="elKind">Classical Element</div><div class="elNameTiny">Extraverted Intuition</div></button><button class="elCell ime" data-el="Si" type="button" aria-label="Si Introverted Sensing"><div class="elSym">Si</div><div class="elKind">Classical Element</div><div class="elNameTiny">Introverted Sensing</div></button><button class="elCell cyb" data-el="T?" type="button" aria-label="T? Judicious Logic"><div class="elSym">T?</div><div class="elKind">Integrated Element</div><div class="elNameTiny">Judicious Logic</div></button><button class="elCell cyb" data-el="F!" type="button" aria-label="F! Judicious Ethics"><div class="elSym">F!</div><div class="elKind">Integrated Element</div><div class="elNameTiny">Judicious Ethics</div></button><div class="axisHead"><b>Decisive</b><span>Se/Ni axis</span></div><button class="elCell ime" data-el="Ni" type="button" aria-label="Ni Introverted Intuition"><div class="elSym">Ni</div><div class="elKind">Classical Element</div><div class="elNameTiny">Introverted Intuition</div></button><button class="elCell ime" data-el="Se" type="button" aria-label="Se Extraverted Sensing"><div class="elSym">Se</div><div class="elKind">Classical Element</div><div class="elNameTiny">Extraverted Sensing</div></button><button class="elCell cyb" data-el="T!" type="button" aria-label="T! Decisive Logic"><div class="elSym">T!</div><div class="elKind">Integrated Element</div><div class="elNameTiny">Decisive Logic</div></button><button class="elCell cyb" data-el="F?" type="button" aria-label="F? Decisive Ethics"><div class="elSym">F?</div><div class="elKind">Integrated Element</div><div class="elNameTiny">Decisive Ethics</div></button><div class="axisHead"><b>Merry</b><span>Fe/Ti axis</span></div><button class="elCell cyb selected" data-el="N?" type="button" aria-label="N? Merry Intuition"><div class="elSym">N?</div><div class="elKind">Integrated Element</div><div class="elNameTiny">Merry Intuition</div></button><button class="elCell cyb" data-el="S!" type="button" aria-label="S! Merry Sensing"><div class="elSym">S!</div><div class="elKind">Integrated Element</div><div class="elNameTiny">Merry Sensing</div></button><button class="elCell ime" data-el="Ti" type="button" aria-label="Ti Introverted Logic"><div class="elSym">Ti</div><div class="elKind">Classical Element</div><div class="elNameTiny">Introverted Logic</div></button><button class="elCell ime" data-el="Fe" type="button" aria-label="Fe Extraverted Ethics"><div class="elSym">Fe</div><div class="elKind">Classical Element</div><div class="elNameTiny">Extraverted Ethics</div></button><div class="axisHead"><b>Serious</b><span>Te/Fi axis</span></div><button class="elCell cyb" data-el="N!" type="button" aria-label="N! Serious Intuition"><div class="elSym">N!</div><div class="elKind">Integrated Element</div><div class="elNameTiny">Serious Intuition</div></button><button class="elCell cyb" data-el="S?" type="button" aria-label="S? Serious Sensing"><div class="elSym">S?</div><div class="elKind">Integrated Element</div><div class="elNameTiny">Serious Sensing</div></button><button class="elCell ime" data-el="Te" type="button" aria-label="Te Extraverted Logic"><div class="elSym">Te</div><div class="elKind">Classical Element</div><div class="elNameTiny">Extraverted Logic</div></button><button class="elCell ime" data-el="Fi" type="button" aria-label="Fi Introverted Ethics"><div class="elSym">Fi</div><div class="elKind">Classical Element</div><div class="elNameTiny">Introverted Ethics</div></button></div></div>
+    <aside class="card detail" id="detailPanel" aria-live="polite">
+    <div class="titleRow">
+      <div class="badgeSym" style="color:var(--cyb)">N?</div>
+      <div><div class="labelInline"><h3 class="primaryName">Merry Intuition</h3><span class="microLabel">Symbolic Reframing</span></div><div class="subtitle"><div class="kindLine">Integrated Element</div><div class="placementLine">N+ Lead — ILE/IEI
+N+ Creative — EIE/LII</div></div></div>
+    </div>
+    <div class="chipRows">
+      <div class="chipLine orbitals"><span class="chip strong">Irrational</span><span class="chip strong">Asking (Separation)</span><span class="chip strong">Positivist</span></div>
+      <div class="chipLine taxonomy"><span class="chip">Aspect: N • Ne/Ni</span><span class="chip">Axis: Merry • Fe/Ti</span></div>
+    </div>
+    <div class="detailBlock"><h4>Definition</h4><p>Speculative-symbolic intuition. N? perceives possibilities as shared meanings, images, theories, myths, roles, jokes, and dramatic interpretations.</p></div>
+    <div class="detailBlock"><h4>Typing signal</h4><p>“What else could this mean?” Conceptual theater, symbolic speculation, interpretive play, and ideas made socially contagious.</p></div>
+    <div class="detailBlock"><h4>Structural formula</h4><p>Ne/Ni strength + valued Fe/Ti. Perceptual aspect crossed with rational value-axis.</p></div>
+  </aside>
+  </div>
+</section>
+<section id="spaces">
+  <div class="sectionHead">
+    <div class="sectionTag">Dichotomy spaces</div>
+    <h2>Reinin Gives the Classical Closure; Minaiev Supplies the Orthogonal Coordinates</h2>
+    <p>The useful 24-dichotomy socion is the union of the classical Reinin closure, the eight Minaiev-only coordinates, and Identity / Valid-Null. This section is type-level, not elemental and not Model-A positional.</p>
+  </div>
+  <div class="grid3">
+    <div class="card"><h3 style="color:var(--green)">15 Reinin</h3><p>Generated from the four Jungian basis dichotomies E, N, T, P by Boolean/Fano closure. These include the Jungian four and the standard Reinin derivatives.</p></div>
+    <div class="card"><h3 style="color:var(--gold)">8 Minaiev</h3><p>Additional type dichotomies generated by leading/creative aspect and leading/creative value-axis partitions. These are the orthogonal coordinates.</p></div>
+    <div class="card"><h3 style="color:var(--cyb)">1 Identity</h3><p>Valid/Null is the identity dichotomy: true of all types versus no types. It completes the algebra but does not discriminate types.</p></div>
+  </div>
+
+  <div style="margin-top:14px">
+    <details open="">
+      <summary>15 Reinin Dichotomies (minus Identity)</summary>
+      <div class="detailsBody">
+        <div class="reininGrid">
+          <div class="reininCol"><h4><span>G</span>General</h4><ol>
+            <li><em>[Valid / Null]</em></li>
+            <li><b>Extraverted / Introverted</b><span class="alt">energy excess / energy lack; outgoing / reserved</span></li>
+            <li><b>Irrational / Rational</b><span class="alt">spontaneity / control; perception / judgment</span></li>
+            <li><b>Static / Dynamic</b><span class="alt">principles / needs; volition / adaptation</span></li>
+          </ol></div>
+          <div class="reininCol"><h4><span>I</span>Irrational</h4><ol>
+            <li><b>Intuitive / Sensory</b><span class="alt">imagination / sense; abstractness / concreteness</span></li>
+            <li><b>Judicious / Decisive</b><span class="alt">cooperation / competition; peaceful / adversarial</span></li>
+            <li><b>Tactical / Strategic</b><span class="alt">detail-work / whole-symbolic orientation</span></li>
+            <li><b>Carefree / Farsighted</b><span class="alt">field-dependence / field-independence</span></li>
+          </ol></div>
+          <div class="reininCol"><h4><span>R</span>Rational</h4><ol>
+            <li><b>Logical / Ethical</b><span class="alt">calculation / suggestion; object / subject orientation</span></li>
+            <li><b>Merry / Serious</b><span class="alt">universal / specialized; group relations / personal relations</span></li>
+            <li><b>Constructivist / Emotivist</b><span class="alt">stubborn affect / flexible affect; depression / hopefulness</span></li>
+            <li><b>Yielding / Obstinate</b><span class="alt">naivety / sophistication</span></li>
+          </ol></div>
+          <div class="reininCol"><h4><span>S</span>Supralocal</h4><ol>
+            <li><b>Democratic / Aristocratic</b><span class="alt">liberalism / paternalism; individualism / collectivism</span></li>
+            <li><b>Asking / Declaring</b><span class="alt">separateness / acceptance; divergence / convergence</span></li>
+            <li><b>Process / Result</b><span class="alt">complication / simplification</span></li>
+            <li><b>Positivist / Negativist</b><span class="alt">contentment / discontent</span></li>
+          </ol></div>
+        </div>
+      </div>
+    </details>
+    <details open="">
+      <summary>Minaiev Space: 8 Lead/Creative Coordinates</summary>
+      <div class="detailsBody">
+        <div class="minaievSplit">
+          <div class="minaievPanel"><h4><span>L</span>Lead Coordinates</h4><ol>
+            <li><b>A — Agenda Register</b><span class="alt">Cerebral / Visceral Lead (NT / SF Lead)</span></li>
+            <li><b>B — Agenda Legibility</b><span class="alt">Implicit / Explicit Lead (NF / ST Lead)</span></li>
+            <li><b>E — Agenda Selection</b><span class="alt">Generative / Optimizing Lead (Alpha / Gamma Lead)</span></li>
+            <li><b>F — Agenda Activation</b><span class="alt">Stewarding / Mobilizing Lead (Delta / Beta Lead)</span></li>
+          </ol></div>
+          <div class="minaievPanel"><h4><span>C</span>Creative Coordinates</h4><ol>
+            <li><b>C — Method Register</b><span class="alt">Cerebral / Visceral Creative (NT / SF Creative)</span></li>
+            <li><b>D — Method Legibility</b><span class="alt">Implicit / Explicit Creative (NF / ST Creative)</span></li>
+            <li><b>G — Method Selection</b><span class="alt">Generative / Optimizing Creative (Alpha / Gamma Creative)</span></li>
+            <li><b>H — Method Activation</b><span class="alt">Stewarding / Mobilizing Creative (Delta / Beta Creative)</span></li>
+          </ol></div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="card minaievCard" style="margin-top:14px">
+    <h3>Minaiev Coordinates: Lead Agenda and Creative Method</h3>
+    <p style="margin-bottom:14px">The Minaiev layer separates a type’s <strong>lead agenda</strong> (the premise reality is read through) from its <strong>creative method</strong> (the flexible channel used to act on that premise).</p>
+    <div class="coordIntro">
+      <div class="coordTile"><b>Lead Agenda</b><span><strong>Bold · Accepting · Inert · Evaluatory.</strong> The type’s stable premise: what reality is assumed to be before the situation starts negotiating back.</span></div>
+      <div class="coordTile"><b>Creative Method</b><span><strong>Cautious · Producing · Contact · Situational.</strong> The type’s working method: the flexible output channel that translates the Lead into action.</span></div>
+    </div>
+    <div class="matrixGrid" style="margin-top:12px">
+      <div class="matrixCard"><h4>Lead Aspect (Domain)</h4><p class="coordText">The information medium the Lead treats as reality’s first layer.</p><div class="miniMatrix"><div class="headCell cornerCell">A/B Agenda</div><div class="headCell">B+ Implicit</div><div class="headCell">B− Explicit</div><div class="headCell">A+ Cerebral</div><div><b>Ne/Ni Lead</b></div><div><b>Te/Ti Lead</b></div><div class="headCell">A− Visceral</div><div><b>Fe/Fi Lead</b></div><div><b>Se/Si Lead</b></div></div></div>
+      <div class="matrixCard"><h4>Creative Aspect (Domain)</h4><p class="coordText">The information medium the Creative turns into an adaptive method.</p><div class="miniMatrix"><div class="headCell cornerCell">C/D Method</div><div class="headCell">D+ Implicit</div><div class="headCell">D− Explicit</div><div class="headCell">C+ Cerebral</div><div><b>Ne/Ni Creative</b></div><div><b>Te/Ti Creative</b></div><div class="headCell">C− Visceral</div><div><b>Fe/Fi Creative</b></div><div><b>Se/Si Creative</b></div></div></div>
+      <div class="matrixCard"><h4>Lead Axis (Coupling)</h4><p class="coordText">The complementary axis the Lead treats as non-negotiable orientation.</p><div class="miniMatrix"><div class="headCell cornerCell">E/F Agenda</div><div class="headCell">F+ Stewarding</div><div class="headCell">F− Mobilizing</div><div class="headCell">E+ Generative</div><div><b>Ne/Si Lead</b></div><div><b>Fe/Ti Lead</b></div><div class="headCell">E− Optimizing</div><div><b>Te/Fi Lead</b></div><div><b>Se/Ni Lead</b></div></div></div>
+      <div class="matrixCard"><h4>Creative Axis (Coupling)</h4><p class="coordText">The complementary axis the Creative uses as situational method.</p><div class="miniMatrix"><div class="headCell cornerCell">G/H Method</div><div class="headCell">H+ Stewarding</div><div class="headCell">H− Mobilizing</div><div class="headCell">G+ Generative</div><div><b>Ne/Si Creative</b></div><div><b>Fe/Ti Creative</b></div><div class="headCell">G− Optimizing</div><div><b>Te/Fi Creative</b></div><div><b>Se/Ni Creative</b></div></div></div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px">
+    <details open="">
+      <summary>Why Both Spaces Matter for Intertype Relations</summary>
+      <div class="detailsBody">
+        <table class="table">
+          <thead><tr><th>Relations</th><th>Space(s)</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td><b>Mirror<br>Conflict<br>Activity<br>Quasi-Identical</b></td><td>Reinin only</td><td>Visible in the classical type-dichotomy closure.</td></tr>
+            <tr><td><b>Kindred<br>Lookalike<br>Semi-dual<br>Mirage</b></td><td>Minaiev only</td><td>These are the relations that make the Integrated Elements useful.</td></tr>
+            <tr><td><b>Identity<br>Super-Ego<br>Dual<br>Extinguishment</b></td><td>Reinin OR Minaiev</td><td>Symmetric relations shared by both spaces.</td></tr>
+            <tr><td><b>Benefit Partners<br>Supervision Partners</b></td><td>Reinin AND Minaiev</td><td>Asymmetric relations appear as compositions across the two spaces.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+<section id="typing">
+  <div class="sectionHead">
+    <div class="sectionTag">Model B and typing use</div>
+    <h2>Integrated Elements Name Mirage + Semi-Dual Grammar</h2>
+    <p>Use the Classical stack first. Integrated Elements are secondary resonance markers: they explain why Mirage and Semi-Dual pairs can share a recognizable semantic atmosphere even when their Classical Ego blocks differ.</p>
+  </div>
+  <div class="card">
+    <h3>Model B Emergence Rule</h3>
+    <p style="margin-bottom:14px">Bukalov’s Model B is the integration layer: each slot is read as a paired functional continuum constituted by Mirage-pairs rather than a single Classical Element. Irrational aspects combine <strong>perceptual aspect strength + rational value-axis</strong>; rational aspects combine <strong>judging aspect strength + irrational value-axis</strong>. The cards below are arranged in ILE’s Model-B order, so they read as integrated continuums rather than a generic catalog.</p>
+    <table class="table" style="margin-bottom:14px">
+      <thead><tr><th></th><th>Lead Axis</th><th>Creative Axis</th></tr></thead>
+      <tbody>
+        <tr><td><b>Lead Aspect</b></td><td>Lead Classical Element</td><td>Lead Integrated Element</td></tr>
+        <tr><td><b>Creative Aspect</b></td><td>Creative Integrated Element</td><td>Creative Classical Element</td></tr>
+      </tbody>
+    </table>
+    <div class="mappingGrid modelBOrder">
+      <div class="mapCard"><div class="sym">N?</div><b>Merry Intuition</b><em>Symbolic Reframing</em><span>ILE/IEI Lead • Ne/Ni
+EIE/LII Creative • Fe/Ti</span></div>
+
+      <div class="mapCard"><div class="sym">T?</div><b>Judicious Logic</b><em>System Checking</em><span>LSE/LII Lead • Te/Ti
+ILE/SLI Creative • Ne/Si</span></div>
+
+      <div class="mapCard"><div class="sym">S?</div><b>Serious Sensing</b><em>Material Appraisal</em><span>SEE/SLI Lead • Se/Si
+LSE/ESI Creative • Te/Fi</span></div>
+
+      <div class="mapCard"><div class="sym">F?</div><b>Decisive Ethics</b><em>Loyalty-Testing (Cold)</em><span>EIE/ESI Lead • Fe/Fi
+SEE/IEI Creative • Se/Ni</span></div>
+
+      <div class="mapCard"><div class="sym">S!</div><b>Merry Sensing</b><em>Field Regulation</em><span>SLE/SEI Lead • Se/Si
+ESE/LSI Creative • Fe/Ti</span></div>
+
+      <div class="mapCard"><div class="sym">F!</div><b>Judicious Ethics</b><em>Trust-Building (Warm)</em><span>ESE/EII Lead • Fe/Fi
+IEE/SEI Creative • Ne/Si</span></div>
+
+      <div class="mapCard"><div class="sym">N!</div><b>Serious Intuition</b><em>Future Filtering</em><span>IEE/ILI Lead • Ne/Ni
+LIE/EII Creative • Te/Fi</span></div>
+
+      <div class="mapCard"><div class="sym">T!</div><b>Decisive Logic</b><em>Command Logic</em><span>LIE/LSI Lead • Te/Ti
+SLE/ILI Creative • Se/Ni</span></div>
+    </div></div>
+  
+  <div class="grid2" style="margin-top:14px">
+    <div class="card">
+      <h3>ILE example: Classical vs Integrated stack</h3>
+      <div class="example">
+        <div>
+          <p style="margin-bottom:9px"><strong>Classical</strong></p>
+          <div class="miniStack">
+            <div class="posBox"><div class="pos">1</div><div class="val" style="color:var(--ime)">Ne</div></div><div class="posBox"><div class="pos">2</div><div class="val" style="color:var(--ime)">Ti</div></div><div class="posBox"><div class="pos">3</div><div class="val" style="color:var(--ime)">Se</div></div><div class="posBox"><div class="pos">4</div><div class="val" style="color:var(--ime)">Fi</div></div>
+            <div class="posBox"><div class="pos">5</div><div class="val" style="color:var(--ime)">Si</div></div><div class="posBox"><div class="pos">6</div><div class="val" style="color:var(--ime)">Fe</div></div><div class="posBox"><div class="pos">7</div><div class="val" style="color:var(--ime)">Ni</div></div><div class="posBox"><div class="pos">8</div><div class="val" style="color:var(--ime)">Te</div></div>
+          </div>
+        </div>
+        <div>
+          <p style="margin-bottom:9px"><strong>Integrated</strong></p>
+          <div class="miniStack">
+            <div class="posBox"><div class="pos">1</div><div class="val" style="color:var(--cyb)">N?</div></div><div class="posBox"><div class="pos">2</div><div class="val" style="color:var(--cyb)">T?</div></div><div class="posBox"><div class="pos">3</div><div class="val" style="color:var(--cyb)">S?</div></div><div class="posBox"><div class="pos">4</div><div class="val" style="color:var(--cyb)">F?</div></div>
+            <div class="posBox"><div class="pos">5</div><div class="val" style="color:var(--cyb)">S!</div></div><div class="posBox"><div class="pos">6</div><div class="val" style="color:var(--cyb)">F!</div></div><div class="posBox"><div class="pos">7</div><div class="val" style="color:var(--cyb)">N!</div></div><div class="posBox"><div class="pos">8</div><div class="val" style="color:var(--cyb)">T!</div></div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:12px">ILE’s Classical Ego is <strong>Ne+Ti</strong>; its Integrated leading pair is <strong>N?+T?</strong>. That explains symbolic/speculative resonance with IEI through N?, and diagnostic/calibrating logic resonance with LII/LSE through T?, without changing the actual Model-A type.</p>
+    </div>
+    <div class="card">
+      <h3>Use it Properly</h3>
+      <p>Integrated Elements are resonance coordinates, not extra functions. Use them after the Classical stack is stable: first locate the Classical Ego, then use the Integrated pair to explain Mirage-like similarity, vibe, and cross-block resemblance.</p>
+      <div class="callout" style="margin-top:14px"><strong>Typing Rule:</strong> If the Integrated layer contradicts the Classical layer, trust the Classical stack first. The Integrated layer explains atmosphere; it does not replace the metabolic machinery.</div>
+    </div>
+  </div>
+
+
+  <div class="card equivalenceCard">
+    <h3>Classical ↔ Integrated Equivalence</h3>
+    <p>Each basis can be rendered through the other. A Classical Element is an aspect plus a quadra-value axis; an Integrated Element is the cross-order version of the same operation.</p>
+    <div class="compareGrid">
+      <div class="basisPanel">
+        <h4>Classical Elements as Integrated bundles</h4>
+        <div class="basisRows">
+          <div class="basisRow"><div class="lhs">Ne</div><div class="rhs"><span class="token cyb">N?</span><span class="token cyb">N!</span><span class="token cyb">T?</span><span class="token cyb">F!</span></div></div>
+<div class="basisRow"><div class="lhs">Ni</div><div class="rhs"><span class="token cyb">N?</span><span class="token cyb">N!</span><span class="token cyb">T!</span><span class="token cyb">F?</span></div></div>
+<div class="basisRow"><div class="lhs">Se</div><div class="rhs"><span class="token cyb">S?</span><span class="token cyb">S!</span><span class="token cyb">T!</span><span class="token cyb">F?</span></div></div>
+<div class="basisRow"><div class="lhs">Si</div><div class="rhs"><span class="token cyb">S?</span><span class="token cyb">S!</span><span class="token cyb">T?</span><span class="token cyb">F!</span></div></div>
+<div class="basisRow"><div class="lhs">Te</div><div class="rhs"><span class="token cyb">T?</span><span class="token cyb">T!</span><span class="token cyb">N!</span><span class="token cyb">S?</span></div></div>
+<div class="basisRow"><div class="lhs">Ti</div><div class="rhs"><span class="token cyb">T?</span><span class="token cyb">T!</span><span class="token cyb">N?</span><span class="token cyb">S!</span></div></div>
+<div class="basisRow"><div class="lhs">Fe</div><div class="rhs"><span class="token cyb">F!</span><span class="token cyb">F?</span><span class="token cyb">N?</span><span class="token cyb">S!</span></div></div>
+<div class="basisRow"><div class="lhs">Fi</div><div class="rhs"><span class="token cyb">F!</span><span class="token cyb">F?</span><span class="token cyb">N!</span><span class="token cyb">S?</span></div></div>
+        </div>
+      </div>
+      <div class="basisPanel">
+        <h4>Integrated Elements as Classical bundles</h4>
+        <div class="basisRows">
+          <div class="basisRow"><div class="lhs">N?</div><div class="rhs"><span class="token ime">Ne</span><span class="token ime">Ni</span><span class="token ime">Ti</span><span class="token ime">Fe</span></div></div>
+<div class="basisRow"><div class="lhs">N!</div><div class="rhs"><span class="token ime">Ne</span><span class="token ime">Ni</span><span class="token ime">Te</span><span class="token ime">Fi</span></div></div>
+<div class="basisRow"><div class="lhs">S?</div><div class="rhs"><span class="token ime">Se</span><span class="token ime">Si</span><span class="token ime">Te</span><span class="token ime">Fi</span></div></div>
+<div class="basisRow"><div class="lhs">S!</div><div class="rhs"><span class="token ime">Se</span><span class="token ime">Si</span><span class="token ime">Ti</span><span class="token ime">Fe</span></div></div>
+<div class="basisRow"><div class="lhs">T?</div><div class="rhs"><span class="token ime">Te</span><span class="token ime">Ti</span><span class="token ime">Ne</span><span class="token ime">Si</span></div></div>
+<div class="basisRow"><div class="lhs">T!</div><div class="rhs"><span class="token ime">Te</span><span class="token ime">Ti</span><span class="token ime">Se</span><span class="token ime">Ni</span></div></div>
+<div class="basisRow"><div class="lhs">F!</div><div class="rhs"><span class="token ime">Fe</span><span class="token ime">Fi</span><span class="token ime">Ne</span><span class="token ime">Si</span></div></div>
+<div class="basisRow"><div class="lhs">F?</div><div class="rhs"><span class="token ime">Fe</span><span class="token ime">Fi</span><span class="token ime">Se</span><span class="token ime">Ni</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="structuralNote">
+      The semantic names are still provisional, but the coordinate cuts are structural: they appear as Model-G dichotomy cuts, torus nodes, and Model-B / Minaiev cross-order artifacts. Treat the Integrated Elements as diagnostic resonance coordinates, not replacement functions.
+    </div>
+  </div>
+
+  <div class="card presenceCard">
+    <h3>Presence-Cube Block Map</h3>
+    <p>The Presence Cube can be read as one Hasse diagram with three projections: classical information blocks, strength blocks, and priority blocks. The fourth view turns those projections into vertical presence levels.</p>
+    <div class="modeBtns" id="presenceButtons" aria-label="Presence cube mode controls"><button type="button" data-mode="modelA" class="active">Model A</button><button type="button" data-mode="dimension">Strength</button><button type="button" data-mode="priority">Priority</button><button type="button" data-mode="level">Presence</button></div>
+    <div class="presenceLayout">
+      <div class="presenceViz" id="presenceViz" aria-label="Interactive Presence Cube diagram"><svg viewBox="0 0 420 500" role="img" aria-label="Information Blocks Presence Cube view" xmlns="http://www.w3.org/2000/svg"><defs>
+    <filter id="glow"><fegaussianblur stdDeviation="4" result="blur"></fegaussianblur><femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+    <filter id="softGlow"><fegaussianblur stdDeviation="8" result="blur"></fegaussianblur><femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+  </defs><text x="238" y="16" fill="#7d879f" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" font-weight="900" letter-spacing="1.6">4L · PRESENCE PEAK</text><text x="238" y="497" fill="#7d879f" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" font-weight="900" letter-spacing="1.6">1L · PRESENCE FLOOR</text><line x1="38" y1="62" x2="38" y2="452" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="3,6"></line><line x1="32" y1="62" x2="46" y2="62" stroke="rgba(255,255,255,.16)" stroke-width="1"></line><text x="15" y="66" fill="#4b556c" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10">4L</text><line x1="32" y1="184" x2="46" y2="184" stroke="rgba(255,255,255,.16)" stroke-width="1"></line><text x="15" y="188" fill="#4b556c" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10">3L</text><line x1="32" y1="328" x2="46" y2="328" stroke="rgba(255,255,255,.16)" stroke-width="1"></line><text x="15" y="332" fill="#4b556c" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10">2L</text><line x1="32" y1="452" x2="46" y2="452" stroke="rgba(255,255,255,.16)" stroke-width="1"></line><text x="15" y="456" fill="#4b556c" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10">1L</text><line x1="238" y1="62" x2="238" y2="204" stroke="rgba(255,255,255,.080)" stroke-width="1.35" stroke-dasharray="5,7"></line><line x1="238" y1="204" x2="110" y2="328" stroke="rgba(255,255,255,.080)" stroke-width="1.35" stroke-dasharray="5,7"></line><line x1="238" y1="204" x2="366" y2="328" stroke="rgba(255,255,255,.080)" stroke-width="1.35" stroke-dasharray="5,7"></line><line x1="238" y1="62" x2="110" y2="184" stroke="rgba(255,255,255,.135)" stroke-width="1.65"></line><line x1="238" y1="62" x2="366" y2="184" stroke="rgba(255,255,255,.135)" stroke-width="1.65"></line><line x1="110" y1="184" x2="110" y2="328" stroke="rgba(255,255,255,.135)" stroke-width="1.65"></line><line x1="366" y1="184" x2="366" y2="328" stroke="rgba(255,255,255,.135)" stroke-width="1.65"></line><line x1="110" y1="328" x2="238" y2="452" stroke="rgba(255,255,255,.135)" stroke-width="1.65"></line><line x1="366" y1="328" x2="238" y2="452" stroke="rgba(255,255,255,.135)" stroke-width="1.65"></line><line x1="110" y1="184" x2="238" y2="306" stroke="rgba(255,255,255,.135)" stroke-width="1.65"></line><line x1="366" y1="184" x2="238" y2="306" stroke="rgba(255,255,255,.135)" stroke-width="1.65"></line><line x1="238" y1="306" x2="238" y2="452" stroke="rgba(255,255,255,.135)" stroke-width="1.65"></line><line x1="238" y1="62" x2="238" y2="204" stroke="#72c7ff" stroke-width="3.1" stroke-linecap="round" stroke-dasharray="7,8" opacity=".88" filter="url(#glow)"></line><text x="238" y="137" fill="#72c7ff" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" font-weight="950" paint-order="stroke" stroke="rgba(17,21,34,.95)" stroke-width="4" stroke-linejoin="round">Ego</text><line x1="238" y1="306" x2="238" y2="452" stroke="#72c7ff" stroke-width="3.1" stroke-linecap="round" filter="url(#glow)"></line><text x="238" y="383" fill="#72c7ff" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" font-weight="950" paint-order="stroke" stroke="rgba(17,21,34,.95)" stroke-width="4" stroke-linejoin="round">Super-Ego</text><line x1="110" y1="328" x2="110" y2="184" stroke="#72c7ff" stroke-width="3.1" stroke-linecap="round" filter="url(#glow)"></line><text x="110" y="260" fill="#72c7ff" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" font-weight="950" paint-order="stroke" stroke="rgba(17,21,34,.95)" stroke-width="4" stroke-linejoin="round">Super-Id</text><line x1="366" y1="328" x2="366" y2="184" stroke="#72c7ff" stroke-width="3.1" stroke-linecap="round" filter="url(#glow)"></line><text x="366" y="260" fill="#72c7ff" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" font-weight="950" paint-order="stroke" stroke="rgba(17,21,34,.95)" stroke-width="4" stroke-linejoin="round">Id</text><circle cx="238" cy="62" r="31" fill="rgba(211,166,255,.075)" filter="url(#softGlow)"></circle><circle cx="238" cy="62" r="22" fill="#151a29" stroke="#72c7ff" stroke-width="2.7"></circle><text x="238" y="68" fill="#f2f4fb" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" font-weight="950">1</text><circle cx="238" cy="204" r="27" fill="rgba(211,166,255,.075)" filter="url(#softGlow)"></circle><circle cx="238" cy="204" r="18" fill="#151a29" stroke="#72c7ff" stroke-width="2.7"></circle><text x="238" y="210" fill="#f2f4fb" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" font-weight="950">2</text><circle cx="238" cy="306" r="27" fill="rgba(211,166,255,.075)" filter="url(#softGlow)"></circle><circle cx="238" cy="306" r="18" fill="#151a29" stroke="#72c7ff" stroke-width="2.7"></circle><text x="238" y="312" fill="#f2f4fb" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" font-weight="950">3</text><circle cx="238" cy="452" r="31" fill="rgba(211,166,255,.075)" filter="url(#softGlow)"></circle><circle cx="238" cy="452" r="22" fill="#151a29" stroke="#72c7ff" stroke-width="2.7"></circle><text x="238" y="458" fill="#f2f4fb" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" font-weight="950">4</text><circle cx="110" cy="328" r="27" fill="rgba(211,166,255,.075)" filter="url(#softGlow)"></circle><circle cx="110" cy="328" r="18" fill="#151a29" stroke="#72c7ff" stroke-width="2.7"></circle><text x="110" y="334" fill="#f2f4fb" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" font-weight="950">5</text><circle cx="110" cy="184" r="27" fill="rgba(211,166,255,.075)" filter="url(#softGlow)"></circle><circle cx="110" cy="184" r="18" fill="#151a29" stroke="#72c7ff" stroke-width="2.7"></circle><text x="110" y="190" fill="#f2f4fb" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" font-weight="950">6</text><circle cx="366" cy="328" r="27" fill="rgba(211,166,255,.075)" filter="url(#softGlow)"></circle><circle cx="366" cy="328" r="18" fill="#151a29" stroke="#72c7ff" stroke-width="2.7"></circle><text x="366" y="334" fill="#f2f4fb" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" font-weight="950">7</text><circle cx="366" cy="184" r="27" fill="rgba(211,166,255,.075)" filter="url(#softGlow)"></circle><circle cx="366" cy="184" r="18" fill="#151a29" stroke="#72c7ff" stroke-width="2.7"></circle><text x="366" y="190" fill="#f2f4fb" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" font-weight="950">8</text></svg></div>
+      <div class="presenceInfo" id="presenceInfo" aria-live="polite">
+    <div class="modeTitle"><b>Information Blocks</b><span>Strong/Weak × Valued/Subdued</span><p>The classical Model-A blocks: where strength and value combine into conscious use, social strain, desired support, and background competence.</p></div>
+    
+      <div class="blockChip">
+        <div class="code">1+2<br>Strong&nbsp;+&nbsp;Valued</div>
+        <div><b>Ego</b><p>Owned program and flexible execution.</p></div>
+      </div>
+      <div class="blockChip">
+        <div class="code">3+4<br>Weak&nbsp;+&nbsp;Subdued</div>
+        <div><b>Super-Ego</b><p>Obligation, strain, and rejected vulnerability.</p></div>
+      </div>
+      <div class="blockChip">
+        <div class="code">5+6<br>Weak&nbsp;+&nbsp;Valued</div>
+        <div><b>Super-Id</b><p>Desired support and growth hunger.</p></div>
+      </div>
+      <div class="blockChip">
+        <div class="code">7+8<br>Strong&nbsp;+&nbsp;Subdued</div>
+        <div><b>Id</b><p>Background capability without value-reward.</p></div>
+      </div></div>
+    </div>
+  </div>
+
+
+  <div class="grid2 talanovGrid">
+    <div class="card talanovMatrixCard">
+      <h3>Talanov Classical Element Matrix</h3>
+      <p style="margin-bottom:12px">The raw Classical Element coefficients look like ordinary function-utilization prominence. ILE, for example, begins with a recognizable Ne-first profile, but the deeper order is not obvious until the values are re-aggregated by Integrated coordinates.</p>
+      <div class="statScroll"><table class="talanovTable"><thead><tr><th>IME</th><th>ILE</th><th>LII</th><th>SEI</th><th>ESE</th><th>SLE</th><th>LSI</th><th>IEI</th><th>EIE</th><th>SEE</th><th>ESI</th><th>ILI</th><th>LIE</th><th>IEE</th><th>EII</th><th>SLI</th><th>LSE</th></tr></thead><tbody><tr><td>Ni</td><td class="statHeat pos" style="--a:0.124">1.4</td><td class="statHeat pos" style="--a:0.068">0.4</td><td class="statHeat neg" style="--a:0.096">-0.9</td><td class="statHeat neg" style="--a:0.157">-2.0</td><td class="statHeat neg" style="--a:0.068">-0.4</td><td class="statHeat neg" style="--a:0.101">-1.0</td><td class="statHeat pos" style="--a:0.186">2.5</td><td class="statHeat pos" style="--a:0.135">1.6</td><td class="statHeat pos" style="--a:0.051">0.1</td><td class="statHeat neg" style="--a:0.135">-1.6</td><td class="statHeat pos" style="--a:0.191">2.6</td><td class="statHeat pos" style="--a:0.051">0.1</td><td class="statHeat pos" style="--a:0.096">0.9</td><td class="statHeat neg" style="--a:0.068">-0.4</td><td class="statHeat neg" style="--a:0.079">-0.6</td><td class="statHeat neg" style="--a:0.197">-2.7</td></tr><tr><td>Ne</td><td class="statHeat pos" style="--a:0.220">3.2</td><td class="statHeat pos" style="--a:0.107">1.1</td><td class="statHeat pos" style="--a:0.084">0.7</td><td class="statHeat pos" style="--a:0.051">0.1</td><td class="statHeat neg" style="--a:0.129">-1.5</td><td class="statHeat neg" style="--a:0.202">-2.8</td><td class="statHeat pos" style="--a:0.146">1.8</td><td class="statHeat pos" style="--a:0.051">0.1</td><td class="statHeat neg" style="--a:0.073">-0.5</td><td class="statHeat neg" style="--a:0.180">-2.4</td><td class="statHeat neg" style="--a:0.056">-0.2</td><td class="statHeat pos" style="--a:0.051">0.1</td><td class="statHeat pos" style="--a:0.197">2.7</td><td class="statHeat pos" style="--a:0.068">0.4</td><td class="statHeat neg" style="--a:0.084">-0.7</td><td class="statHeat neg" style="--a:0.157">-2.0</td></tr><tr><td>Si</td><td class="statHeat neg" style="--a:0.107">-1.1</td><td class="statHeat neg" style="--a:0.073">-0.5</td><td class="statHeat pos" style="--a:0.186">2.5</td><td class="statHeat pos" style="--a:0.096">0.9</td><td class="statHeat neg" style="--a:0.090">-0.8</td><td class="statHeat neg" style="--a:0.051">-0.1</td><td class="statHeat neg" style="--a:0.073">-0.5</td><td class="statHeat neg" style="--a:0.191">-2.6</td><td class="statHeat neg" style="--a:0.090">-0.8</td><td class="statHeat pos" style="--a:0.073">0.5</td><td class="statHeat neg" style="--a:0.090">-0.8</td><td class="statHeat neg" style="--a:0.112">-1.2</td><td class="statHeat zero">0.0</td><td class="statHeat pos" style="--a:0.090">0.8</td><td class="statHeat pos" style="--a:0.180">2.4</td><td class="statHeat pos" style="--a:0.107">1.1</td></tr><tr><td>Se</td><td class="statHeat neg" style="--a:0.101">-1.0</td><td class="statHeat neg" style="--a:0.174">-2.3</td><td class="statHeat neg" style="--a:0.101">-1.0</td><td class="statHeat neg" style="--a:0.062">-0.3</td><td class="statHeat pos" style="--a:0.219">3.1</td><td class="statHeat pos" style="--a:0.124">1.4</td><td class="statHeat neg" style="--a:0.112">-1.2</td><td class="statHeat pos" style="--a:0.051">0.1</td><td class="statHeat pos" style="--a:0.208">2.9</td><td class="statHeat pos" style="--a:0.073">0.5</td><td class="statHeat neg" style="--a:0.056">-0.2</td><td class="statHeat pos" style="--a:0.073">0.5</td><td class="statHeat neg" style="--a:0.084">-0.7</td><td class="statHeat neg" style="--a:0.186">-2.5</td><td class="statHeat neg" style="--a:0.062">-0.3</td><td class="statHeat pos" style="--a:0.101">1.0</td></tr><tr><td>Ti</td><td class="statHeat pos" style="--a:0.107">1.1</td><td class="statHeat pos" style="--a:0.197">2.7</td><td class="statHeat neg" style="--a:0.118">-1.3</td><td class="statHeat neg" style="--a:0.124">-1.4</td><td class="statHeat pos" style="--a:0.135">1.6</td><td class="statHeat pos" style="--a:0.191">2.6</td><td class="statHeat neg" style="--a:0.124">-1.4</td><td class="statHeat neg" style="--a:0.056">-0.2</td><td class="statHeat neg" style="--a:0.129">-1.5</td><td class="statHeat neg" style="--a:0.068">-0.4</td><td class="statHeat pos" style="--a:0.090">0.8</td><td class="statHeat pos" style="--a:0.062">0.3</td><td class="statHeat neg" style="--a:0.186">-2.5</td><td class="statHeat neg" style="--a:0.090">-0.8</td><td class="statHeat pos" style="--a:0.051">0.1</td><td class="statHeat pos" style="--a:0.068">0.4</td></tr><tr><td>Te</td><td class="statHeat neg" style="--a:0.073">-0.5</td><td class="statHeat neg" style="--a:0.062">-0.3</td><td class="statHeat neg" style="--a:0.152">-1.9</td><td class="statHeat neg" style="--a:0.112">-1.2</td><td class="statHeat pos" style="--a:0.096">0.9</td><td class="statHeat pos" style="--a:0.124">1.4</td><td class="statHeat neg" style="--a:0.163">-2.1</td><td class="statHeat neg" style="--a:0.141">-1.7</td><td class="statHeat neg" style="--a:0.051">-0.1</td><td class="statHeat pos" style="--a:0.062">0.3</td><td class="statHeat pos" style="--a:0.129">1.5</td><td class="statHeat pos" style="--a:0.197">2.7</td><td class="statHeat neg" style="--a:0.112">-1.2</td><td class="statHeat neg" style="--a:0.096">-0.9</td><td class="statHeat pos" style="--a:0.096">0.9</td><td class="statHeat pos" style="--a:0.174">2.3</td></tr><tr><td>Fi</td><td class="statHeat neg" style="--a:0.152">-1.9</td><td class="statHeat neg" style="--a:0.101">-1.0</td><td class="statHeat pos" style="--a:0.112">1.2</td><td class="statHeat pos" style="--a:0.084">0.7</td><td class="statHeat neg" style="--a:0.169">-2.2</td><td class="statHeat neg" style="--a:0.112">-1.2</td><td class="statHeat pos" style="--a:0.084">0.7</td><td class="statHeat neg" style="--a:0.056">-0.2</td><td class="statHeat pos" style="--a:0.051">0.1</td><td class="statHeat pos" style="--a:0.163">2.1</td><td class="statHeat neg" style="--a:0.073">-0.5</td><td class="statHeat neg" style="--a:0.118">-1.3</td><td class="statHeat pos" style="--a:0.096">0.9</td><td class="statHeat pos" style="--a:0.169">2.2</td><td class="statHeat pos" style="--a:0.073">0.5</td><td class="statHeat zero">0.0</td></tr><tr><td>Fe</td><td class="statHeat zero">0.0</td><td class="statHeat neg" style="--a:0.090">-0.8</td><td class="statHeat pos" style="--a:0.129">1.5</td><td class="statHeat pos" style="--a:0.186">2.5</td><td class="statHeat neg" style="--a:0.068">-0.4</td><td class="statHeat neg" style="--a:0.129">-1.5</td><td class="statHeat pos" style="--a:0.135">1.6</td><td class="statHeat pos" style="--a:0.186">2.5</td><td class="statHeat pos" style="--a:0.084">0.7</td><td class="statHeat neg" style="--a:0.073">-0.5</td><td class="statHeat neg" style="--a:0.174">-2.3</td><td class="statHeat neg" style="--a:0.129">-1.5</td><td class="statHeat pos" style="--a:0.118">1.3</td><td class="statHeat pos" style="--a:0.068">0.4</td><td class="statHeat neg" style="--a:0.157">-2.0</td><td class="statHeat neg" style="--a:0.124">-1.4</td></tr></tbody></table></div>
+    </div>
+    <div class="card talanovRankCard">
+      <h3>Talanov’s Statistics Imply Surprisingly Ordered Integrated Element Usage</h3>
+      <p>When the measured prominence of ILE’s Classical Elements is re-aggregated by averaging the four Classical coefficients that compose each Integrated Element, the result happens to fall into a remarkably neat hierarchy. What first looks like a loose Ne-first profile resolves into a clean eight-step order once the Integrated coordinates are averaged out.</p>
+      <div class="rankList"><div class="rankRow"><div class="rank">1</div><div class="sym">N?</div><div class="meta"><div class="head"><b>Merry Intuition</b><span class="rankBadge block blue">Ego</span></div><span>Alpha NT × Beta NF</span></div><div class="coef">+1.43</div></div>
+<div class="rankRow"><div class="rank">2</div><div class="sym">T?</div><div class="meta"><div class="head"><b>Judicious Logic</b><span class="rankBadge block blue">Ego</span></div><span>Alpha NT × Delta ST</span></div><div class="coef">+0.68</div></div>
+<div class="rankRow"><div class="rank">3</div><div class="sym">N!</div><div class="meta"><div class="head"><b>Serious Intuition</b><span class="rankBadge block green">Id</span></div><span>Gamma NT × Delta NF</span></div><div class="coef">+0.55</div></div>
+<div class="rankRow"><div class="rank">4</div><div class="sym">T!</div><div class="meta"><div class="head"><b>Decisive Logic</b><span class="rankBadge block green">Id</span></div><span>Gamma NT × Beta ST</span></div><div class="coef">+0.25</div></div>
+<div class="rankRow"><div class="rank">5</div><div class="sym">F!</div><div class="meta"><div class="head"><b>Judicious Ethics</b><span class="rankBadge block yellow">Super-Id</span></div><span>Alpha SF × Delta NF</span></div><div class="coef">+0.05</div></div>
+<div class="rankRow"><div class="rank">6</div><div class="sym">S!</div><div class="meta"><div class="head"><b>Merry Sensing</b><span class="rankBadge block yellow">Super-Id</span></div><span>Alpha SF × Beta ST</span></div><div class="coef">−0.25</div></div>
+<div class="rankRow"><div class="rank">7</div><div class="sym">F?</div><div class="meta"><div class="head"><b>Decisive Ethics</b><span class="rankBadge block red">Super-Ego</span></div><span>Gamma SF × Beta NF</span></div><div class="coef">−0.38</div></div>
+<div class="rankRow"><div class="rank">8</div><div class="sym">S?</div><div class="meta"><div class="head"><b>Serious Sensing</b><span class="rankBadge block red">Super-Ego</span></div><span>Gamma SF × Delta ST</span></div><div class="coef">−1.13</div></div></div>
+      <div class="crucialNote"><strong>Crucial Note:</strong> Classical + Integrated IMEs = Unique Type IMEs!</div>
+    </div>
+
+
+  <div class="card modelGSection">
+    <h3>Model-G Dichotomy Cuts for ILE</h3>
+    <p>These binary cuts show why the Integrated layer is not just a naming trick. The same cross-order coordinates partition the Classical Elements into repeatable Model-G-style dichotomies.</p>
+    <div class="modelGGrid">
+      <div class="gCard">
+        <div class="gTop">
+          <div class="gPair"><span class="token cyb">T?</span><span class="token">F?</span></div>
+          <div class="gLabels"><b>Energetic</b> / <em>Passive</em></div>
+        </div>
+        <div class="gMini"><span class="on">Ne</span><span class="on">Te</span><span class="off">Se</span><span class="off">Fe</span><span class="on">Ti</span><span class="on">Si</span><span class="off">Fi</span><span class="off">Ni</span></div>
+      </div>
+      <div class="gCard">
+        <div class="gTop">
+          <div class="gPair"><span class="token cyb">N?</span><span class="token">S?</span></div>
+          <div class="gLabels"><b>Excitable</b> / <em>Inhibitable</em></div>
+        </div>
+        <div class="gMini"><span class="on">Ne</span><span class="off">Te</span><span class="off">Se</span><span class="on">Fe</span><span class="on">Ti</span><span class="off">Si</span><span class="off">Fi</span><span class="on">Ni</span></div>
+      </div>
+      <div class="gCard">
+        <div class="gTop">
+          <div class="gPair"><span class="token cyb">N!</span><span class="token">S!</span></div>
+          <div class="gLabels"><b>Tensioned</b> / <em>Relaxed</em></div>
+        </div>
+        <div class="gMini"><span class="on">Ne</span><span class="on">Te</span><span class="off">Se</span><span class="off">Fe</span><span class="off">Ti</span><span class="off">Si</span><span class="on">Fi</span><span class="on">Ni</span></div>
+      </div>
+      <div class="gCard">
+        <div class="gTop">
+          <div class="gPair"><span class="token cyb">F!</span><span class="token">T!</span></div>
+          <div class="gLabels"><b>Impressionable</b> / <em>Unimpressionable</em></div>
+        </div>
+        <div class="gMini"><span class="on">Ne</span><span class="off">Te</span><span class="off">Se</span><span class="on">Fe</span><span class="off">Ti</span><span class="on">Si</span><span class="on">Fi</span><span class="off">Ni</span></div>
+      </div>
+    </div>
+    <div class="formulaStrip">N? + T? + N! + F! = Ne</div>
+  </div>
+  </div>
+
+</section>
+</main>
+<footer class="wrap sourceFoot">
+  <div><strong>The Integrated Element Lattice</strong> · standalone reference</div>
+  <div class="sourceList" aria-label="Sources">
+    <span>Vincent Math Models</span>
+    <span>Presence Cube / Structure of the Socion</span>
+    <span>Minaiev Dichotomy Spaces</span>
+    <span>Talanov / Romanov · Socionavigator</span>
+    <span>Varlawend / Model G Dichotomy Proofs</span>
+    <span>Lao Tzunami · Socionics Torus</span>
+  </div>
+</footer>
+<script>
+const aspects = [{"code":"Intuition","label":"Ne/Ni"},{"code":"Sensing","label":"Se/Si"},{"code":"Logic","label":"Te/Ti"},{"code":"Ethics","label":"Fe/Fi"}];
+const rows = [{"axis":"Judicious","label":"Ne/Si axis","cells":["Ne","Si","T?","F!"]},{"axis":"Decisive","label":"Se/Ni axis","cells":["Ni","Se","T!","F?"]},{"axis":"Merry","label":"Fe/Ti axis","cells":["N?","S!","Ti","Fe"]},{"axis":"Serious","label":"Te/Fi axis","cells":["N!","S?","Te","Fi"]}];
+const data = {"Ne":{"kind":"Classical Element","name":"Extraverted Intuition","micro":"possibility expansion","alias":"Ne Lead — ILE/IEE · Ne Creative — LII/EII","aspect":"N • Ne/Ni","axis":"Judicious • Ne/Si","orbitals":["Irrational","Extraverted","Static"],"formula":"N aspect (Ne/Ni) + Judicious axis (Ne/Si) selects the extraverted-static pole: Ne.","definition":"Divergent possibility perception. Ne expands the option-space: alternatives, hidden openings, unusual interpretations, experiments, and what else something could become.","signal":"Brainstorming, reframing, novelty-seeking, conceptual play, and resistance to premature closure.","placement":"Ne Lead — ILE/IEE\nNe Creative — LII/EII"},"Ni":{"kind":"Classical Element","name":"Introverted Intuition","micro":"trajectory compression","alias":"Ni Lead — IEI/ILI · Ni Creative — EIE/LIE","aspect":"N • Ne/Ni","axis":"Decisive • Ni/Se","orbitals":["Irrational","Introverted","Dynamic"],"formula":"N aspect (Ne/Ni) + Decisive axis (Ni/Se) selects the introverted-dynamic pole: Ni.","definition":"Convergent temporal perception. Ni tracks implication, timing, symbolic continuity, trends, inevitability, and the direction events are taking.","signal":"Foresight, narrative compression, symbolic reading, timing sensitivity, and attention to where the process is going.","placement":"Ni Lead — IEI/ILI\nNi Creative — EIE/LIE"},"Se":{"kind":"Classical Element","name":"Extraverted Sensing","micro":"force registration","alias":"Se Lead — SLE/SEE · Se Creative — LSI/ESI","aspect":"S • Se/Si","axis":"Decisive • Se/Ni","orbitals":["Irrational","Extraverted","Static"],"formula":"S aspect (Se/Si) + Decisive axis (Se/Ni) selects the extraverted-static pole: Se.","definition":"Force and leverage perception. Se registers pressure, territory, will, resistance, impact, and the immediate power geometry of a situation.","signal":"Assertiveness, boundary-testing, decisive action, competition, and direct alteration of the physical-social field.","placement":"Se Lead — SLE/SEE\nSe Creative — LSI/ESI"},"Si":{"kind":"Classical Element","name":"Introverted Sensing","micro":"homeostatic calibration","alias":"Si Lead — SEI/SLI · Si Creative — ESE/LSE","aspect":"S • Se/Si","axis":"Judicious • Si/Ne","orbitals":["Irrational","Introverted","Dynamic"],"formula":"S aspect (Se/Si) + Judicious axis (Si/Ne) selects the introverted-dynamic pole: Si.","definition":"Somatic-environmental calibration. Si tracks bodily state, comfort, flow, sensory quality, relaxation, sustainability, and organism-environment fit.","signal":"Comfort tuning, aesthetic balance, health rhythms, low-friction environments, and non-coercive stabilization.","placement":"Si Lead — SEI/SLI\nSi Creative — ESE/LSE"},"Ti":{"kind":"Classical Element","name":"Introverted Logic","micro":"structural coherence","alias":"Ti Lead — LII/LSI · Ti Creative — ILE/SLE","aspect":"T • Te/Ti","axis":"Merry • Ti/Fe","orbitals":["Rational","Introverted","Static"],"formula":"T aspect (Te/Ti) + Merry axis (Ti/Fe) selects the introverted-static pole: Ti.","definition":"Formal-structural judgment. Ti organizes information by definitions, categories, consistency, hierarchy, axioms, and internal coherence.","signal":"Classification, contradiction-checking, principled reasoning, clean models, and precise conceptual boundaries.","placement":"Ti Lead — LII/LSI\nTi Creative — ILE/SLE"},"Te":{"kind":"Classical Element","name":"Extraverted Logic","micro":"operational leverage","alias":"Te Lead — LIE/LSE · Te Creative — ILI/SLI","aspect":"T • Te/Ti","axis":"Serious • Te/Fi","orbitals":["Rational","Extraverted","Dynamic"],"formula":"T aspect (Te/Ti) + Serious axis (Te/Fi) selects the extraverted-dynamic pole: Te.","definition":"Operational-factual judgment. Te evaluates methods, productivity, usefulness, resource management, empirical facts, and what works in practice.","signal":"Optimization, procedure, metrics, workflow, factual leverage, and practical effectiveness.","placement":"Te Lead — LIE/LSE\nTe Creative — ILI/SLI"},"Fe":{"kind":"Classical Element","name":"Extraverted Ethics","micro":"affective broadcasting","alias":"Fe Lead — ESE/EIE · Fe Creative — SEI/IEI","aspect":"F • Fe/Fi","axis":"Merry • Fe/Ti","orbitals":["Rational","Extraverted","Dynamic"],"formula":"F aspect (Fe/Fi) + Merry axis (Fe/Ti) selects the extraverted-dynamic pole: Fe.","definition":"Affective-communicative judgment. Fe registers and modulates mood, expression, collective emotional energy, morale, belonging, and contagious feeling.","signal":"Charisma, emotional broadcasting, atmosphere control, shared enthusiasm, and affective mobilization.","placement":"Fe Lead — ESE/EIE\nFe Creative — SEI/IEI"},"Fi":{"kind":"Classical Element","name":"Introverted Ethics","micro":"relational valuation","alias":"Fi Lead — ESI/EII · Fi Creative — SEE/IEE","aspect":"F • Fe/Fi","axis":"Serious • Fi/Te","orbitals":["Rational","Introverted","Static"],"formula":"F aspect (Fe/Fi) + Serious axis (Fi/Te) selects the introverted-static pole: Fi.","definition":"Relational-valence judgment. Fi tracks trust, closeness, loyalty, attraction/repulsion, sincerity, character, moral attitude, and personal significance.","signal":"Selective bonds, ethical boundaries, loyalty sensitivity, private valuation, and character judgment.","placement":"Fi Lead — ESI/EII\nFi Creative — SEE/IEE"},"N?":{"kind":"Integrated Element","name":"Merry Intuition","micro":"Symbolic Reframing","alias":"N+ · Ne/Ni + Fe/Ti","aspect":"N • Ne/Ni","axis":"Merry • Fe/Ti","orbitals":["Irrational","Asking (Separation)","Positivist"],"formula":"Ne/Ni strength + valued Fe/Ti. Perceptual aspect crossed with rational value-axis.","definition":"Speculative-symbolic intuition. N? perceives possibilities as shared meanings, images, theories, myths, roles, jokes, and dramatic interpretations.","signal":"“What else could this mean?” Conceptual theater, symbolic speculation, interpretive play, and ideas made socially contagious.","placement":"N+ Lead — ILE/IEI\nN+ Creative — EIE/LII"},"N!":{"kind":"Integrated Element","name":"Serious Intuition","micro":"Future Filtering","alias":"N− · Ne/Ni + Te/Fi","aspect":"N • Ne/Ni","axis":"Serious • Te/Fi","orbitals":["Irrational","Declaring (Acceptance)","Negativist"],"formula":"Ne/Ni strength + valued Te/Fi. Perceptual aspect crossed with rational value-axis.","definition":"Private-pragmatic foresight. N! filters potential by realism, consequence, risk, personal significance, trust, and eventual viability.","signal":"“Where is this actually going?” Sober possibility-filtering, future realism, meaningful potential, and quiet dismissal of dead ends.","placement":"N− Lead — IEE/ILI\nN− Creative — LIE/EII"},"S?":{"kind":"Integrated Element","name":"Serious Sensing","micro":"Material Appraisal","alias":"S+ · Se/Si + Te/Fi","aspect":"S • Se/Si","axis":"Serious • Te/Fi","orbitals":["Irrational","Asking (Separation)","Positivist"],"formula":"Se/Si strength + valued Te/Fi. Perceptual aspect crossed with rational value-axis.","definition":"Material-pragmatic calibration. S? reads tangible reality through resource, quality, utility, possession, appetite, reliability, and advantage.","signal":"“What is useful, desirable, workable, or worth claiming?” Hands-on testing, quality comparison, material leverage, and embodied pragmatism.","placement":"S+ Lead — SEE/SLI\nS+ Creative — LSE/ESI"},"S!":{"kind":"Integrated Element","name":"Merry Sensing","micro":"Field Regulation","alias":"S− · Se/Si + Fe/Ti","aspect":"S • Se/Si","axis":"Merry • Fe/Ti","orbitals":["Irrational","Declaring (Acceptance)","Negativist"],"formula":"Se/Si strength + valued Fe/Ti. Perceptual aspect crossed with rational value-axis.","definition":"Embodied atmosphere-control. S! reads the immediate physical-social field as something to stage, pressure, relax, defend, choreograph, or regulate.","signal":"“This is the room; this is how we move in it.” Arena control, comfort regulation, vibe-policing, hospitality, and spatial-emotional management.","placement":"S− Lead — SLE/SEI\nS− Creative — ESE/LSI"},"T!":{"kind":"Integrated Element","name":"Decisive Logic","micro":"Command Logic","alias":"T+ · Te/Ti + Se/Ni","aspect":"T • Te/Ti","axis":"Decisive • Se/Ni","orbitals":["Rational","Declaring (Acceptance)","Positivist"],"formula":"Te/Ti strength + valued Se/Ni. Judging aspect crossed with perceptual value-axis.","definition":"Strategic-Command Logic. T! uses logic to secure order, hierarchy, law, procedure, timelines, enforcement, and decisive execution.","signal":"“What structure or action must be imposed?” Strategic planning, Command Logic, institutional order, realistic constraints, and execution under pressure.","placement":"T+ Lead — LIE/LSI\nT+ Creative — SLE/ILI"},"T?":{"kind":"Integrated Element","name":"Judicious Logic","micro":"System Checking","alias":"T− · Te/Ti + Ne/Si","aspect":"T • Te/Ti","axis":"Judicious • Ne/Si","orbitals":["Rational","Asking (Separation)","Negativist"],"formula":"Te/Ti strength + valued Ne/Si. Judging aspect crossed with perceptual value-axis.","definition":"Diagnostic-calibrating logic. T? clarifies, troubleshoots, defines, optimizes, repairs, standardizes, and makes systems work cleanly without unnecessary force.","signal":"“What is the correct method after checking conditions?” Definitions, procedures, careful questions, error correction, and sustainable workflow.","placement":"T− Lead — LSE/LII\nT− Creative — ILE/SLI"},"F!":{"kind":"Integrated Element","name":"Judicious Ethics","micro":"Trust-Building (Warm)","alias":"F+ · Fe/Fi + Ne/Si","aspect":"F • Fe/Fi","axis":"Judicious • Ne/Si","orbitals":["Rational","Declaring (Acceptance)","Positivist"],"formula":"Fe/Fi strength + valued Ne/Si. Judging aspect crossed with perceptual value-axis.","definition":"Humane-supportive ethics. F! creates warmth, encouragement, moral safety, hospitality, emotional nourishment, and relational openness.","signal":"“How do we help people feel cared for and safe?” Supportive warmth, encouragement, charitable attention, and restorative goodwill.","placement":"F+ Lead — ESE/EII\nF+ Creative — IEE/SEI"},"F?":{"kind":"Integrated Element","name":"Decisive Ethics","micro":"Loyalty-Testing (Cold)","alias":"F− · Fe/Fi + Se/Ni","aspect":"F • Fe/Fi","axis":"Decisive • Se/Ni","orbitals":["Rational","Asking (Separation)","Negativist"],"formula":"Fe/Fi strength + valued Se/Ni. Judging aspect crossed with perceptual value-axis.","definition":"Boundary-mobilizing ethics. F? detects and intensifies loyalty, betrayal, sincerity, danger, sacrifice, passion, moral threat, and emotional commitment.","signal":"“What loyalty or boundary is really at stake?” Moral pressure, loyalty testing, passionate mobilization, protective suspicion, and high-stakes sincerity.","placement":"F− Lead — EIE/ESI\nF− Creative — SEE/IEI"}};
+const blockModes = {"modelA":{"label":"Model A","title":"Information Blocks","subtitle":"Strong/Weak × Valued/Subdued","color":"#72c7ff","modeNote":"The classical Model-A blocks: where strength and value combine into conscious use, social strain, desired support, and background competence.","items":[{"name":"Ego","code":"1+2","pair":[1,2],"traits":"Strong + Valued","desc":"Owned program and flexible execution."},{"name":"Super-Ego","code":"3+4","pair":[3,4],"traits":"Weak + Subdued","desc":"Obligation, strain, and rejected vulnerability."},{"name":"Super-Id","code":"5+6","pair":[5,6],"traits":"Weak + Valued","desc":"Desired support and growth hunger."},{"name":"Id","code":"7+8","pair":[7,8],"traits":"Strong + Subdued","desc":"Background capability without value-reward."}],"labelDy":4},"dimension":{"label":"Strength","title":"Strength Blocks","subtitle":"Strong/Weak × Bold/Cautious","color":"#ffb86b","modeNote":"Strength names how capable, accessible, and self-sufficient a channel is under real conditions.","items":[{"name":"Mastery","code":"4D · 1+8","pair":[1,8],"traits":"Strong + Bold","desc":"Most autonomous command; easy, confident, and high-range."},{"name":"Fluency","code":"3D · 2+7","pair":[2,7],"traits":"Strong + Cautious","desc":"Skilled but measured; capable with situational timing."},{"name":"Norms","code":"2D · 3+6","pair":[3,6],"traits":"Weak + Bold","desc":"Visible effort guided by standards, practice, and feedback."},{"name":"Dependence","code":"1D · 4+5","pair":[4,5],"traits":"Weak + Cautious","desc":"Needs outside calibration; least self-sufficient channel."}],"labelDx":18,"labelDy":-12},"priority":{"label":"Priority","title":"Priority Blocks","subtitle":"Valued/Subdued × Bold/Cautious","color":"#83b6ff","modeNote":"Priority names how much the psyche directly prefers, pursues, or avoids a channel, regardless of raw competence.","items":[{"name":"Drive","code":"4P · 1+6","pair":[1,6],"traits":"Bold + Valued","desc":"Primary motivational current; what life keeps returning to."},{"name":"Support","code":"3P · 2+5","pair":[2,5],"traits":"Cautious + Valued","desc":"Valued but careful: adaptive support and desired input."},{"name":"Utility","code":"2P · 3+8","pair":[3,8],"traits":"Bold + Subdued","desc":"Usable when needed, but not valued for its own sake."},{"name":"Aversion","code":"1P · 4+7","pair":[4,7],"traits":"Cautious + Subdued","desc":"Deprioritized, avoidant, or kept outside the main life-aim."}],"labelDx":-18,"labelDy":-12},"level":{"label":"Presence","title":"Presence Levels","subtitle":"Level = average of Priority and Strength","color":"#d3a6ff","modeNote":"Level is the vertical salience gradient: how present a function is in the psyche after preference and strength are averaged.","items":[{"name":"Peak","code":"4L · 1","nodes":[1],"traits":"Lead","desc":"Maximum presence; the psyche’s dominant anchor."},{"name":"Orbit","code":"3L · 6,2,8","nodes":[6,2,8],"traits":"Mobilizing · Creative · Demonstrative","desc":"Active supporting orbit around the Lead."},{"name":"Margin","code":"2L · 5,3,7","nodes":[5,3,7],"traits":"Suggestive · Role\nIgnoring","desc":"Peripheral or indirect channels: usable, desired, or subordinated."},{"name":"Floor","code":"1L · 4","nodes":[4],"traits":"PoLR","desc":"Minimum presence; the most absent or destabilizing channel."}],"labelDx":0,"labelDy":0}};
+const cubeCoords = {
+  // Upright two-diamond projection: front square 1-6-3-8 and rear square 2-5-4-7.
+  // Shifted right to balance the fixed level bracket on the left.
+  // Hidden edges are 1+2, 2+5, and 2+7; there is intentionally no 2+3 edge.
+  1:{x:238,y:62},
+  6:{x:110,y:184}, 8:{x:366,y:184},
+  2:{x:238,y:204}, 3:{x:238,y:306},
+  5:{x:110,y:328}, 7:{x:366,y:328},
+  4:{x:238,y:452}
+};
+const cubeSolidEdges = [[1,6],[1,8],[6,5],[8,7],[5,4],[7,4],[6,3],[8,3],[3,4]];
+const cubeHiddenEdges = [[1,2],[2,5],[2,7]];
+const hiddenEdgeKeys = new Set(cubeHiddenEdges.map(([a,b]) => edgeKey(a,b)));
+const levelGuides = [
+  {label:'4L', name:'Peak', y:62},
+  {label:'3L', name:'Orbit', y:184},
+  {label:'2L', name:'Margin', y:328},
+  {label:'1L', name:'Floor', y:452}
+];
+const nodePresenceLevel = {1:4, 6:3, 2:3, 8:3, 5:2, 3:2, 7:2, 4:1};
+const nodeLevelOpacity = {4:1, 3:.74, 2:.48, 1:.26};
+function esc(s){return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+function traitHTML(s){return esc(s).replace(/ \+ /g,'&nbsp;+&nbsp;').replace(/\n/g,'<br>');}
+function edgeKey(a,b){return [Number(a),Number(b)].sort((x,y)=>x-y).join('-');}
+function isHiddenEdge(a,b){return hiddenEdgeKeys.has(edgeKey(a,b));}
+function lineBetween(a,b,attrs=''){const A=cubeCoords[a],B=cubeCoords[b];return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" ${attrs}/>`;}
+function renderLattice(){
+  const el = document.getElementById('latticeGrid');
+  let html = '<div class="corner"><span>Aspect →</span><span>Axis ↓</span></div>';
+  aspects.forEach(a => html += `<div class="aspectHead"><b>${esc(a.code)}</b><span>${esc(a.label)}</span></div>`);
+  rows.forEach(r => {
+    html += `<div class="axisHead"><b>${esc(r.axis)}</b><span>${esc(r.label)}</span></div>`;
+    r.cells.forEach(id => {
+      const d = data[id];
+      const cls = d.kind.startsWith('Classical') ? 'ime' : 'cyb';
+      html += `<button class="elCell ${cls}" data-el="${esc(id)}" type="button" aria-label="${esc(id)} ${esc(d.name)}"><div class="elSym">${esc(id)}</div><div class="elKind">${esc(d.kind)}</div><div class="elNameTiny">${esc(d.name)}</div></button>`;
+    });
+  });
+  el.innerHTML = html;
+  document.querySelectorAll('[data-el]').forEach(btn => btn.addEventListener('click', () => selectElement(btn.dataset.el)));
+}
+function selectElement(id){
+  const d = data[id];
+  document.querySelectorAll('[data-el]').forEach(btn => btn.classList.toggle('selected', btn.dataset.el===id));
+  const kindClass = d.kind.startsWith('Classical') ? 'ime' : 'cyb';
+  const detail = document.getElementById('detailPanel');
+  detail.innerHTML = `
+    <div class="titleRow">
+      <div class="badgeSym" style="color:${kindClass==='ime'?'var(--ime)':'var(--cyb)'}">${esc(id)}</div>
+      <div><div class="labelInline"><h3 class="primaryName">${esc(d.name)}</h3><span class="microLabel">${esc(d.micro)}</span></div><div class="subtitle"><div class="kindLine">${esc(d.kind)}</div><div class="placementLine">${esc(d.placement || d.alias)}</div></div></div>
+    </div>
+    <div class="chipRows">
+      <div class="chipLine orbitals">${d.orbitals.map(o => `<span class="chip strong">${esc(o)}</span>`).join('')}</div>
+      <div class="chipLine taxonomy"><span class="chip">Aspect: ${esc(d.aspect)}</span><span class="chip">Axis: ${esc(d.axis)}</span></div>
+    </div>
+    <div class="detailBlock"><h4>Definition</h4><p>${esc(d.definition)}</p></div>
+    <div class="detailBlock"><h4>Typing signal</h4><p>${esc(d.signal)}</p></div>
+    <div class="detailBlock"><h4>Structural formula</h4><p>${esc(d.formula)}</p></div>
+  `;
+}
+
+function setupNav(){
+  const buttons = document.querySelectorAll('.topnav button[data-target]');
+  const smoothScrollTo = (target) => {
+    // Compute absolute Y minus a 70px offset for the sticky topnav.
+    const rect = target.getBoundingClientRect();
+    const y = rect.top + window.pageYOffset - 70;
+    // Use window.scrollTo with smooth behavior — works reliably on iOS Safari
+    // where target.scrollIntoView({behavior:'smooth'}) is flaky in older versions.
+    try {
+      window.scrollTo({top: y, behavior: 'smooth'});
+    } catch(e) {
+      // Older browsers without options support
+      window.scrollTo(0, y);
+    }
+  };
+  buttons.forEach(btn => {
+    const handler = (e) => {
+      e.preventDefault();
+      const target = document.getElementById(btn.dataset.target);
+      if(target) smoothScrollTo(target);
+    };
+    btn.addEventListener('click', handler);
+    // touchend gives more reliable response on iOS than waiting for the
+    // synthesized click event, which is sometimes suppressed after long-press.
+    btn.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      const target = document.getElementById(btn.dataset.target);
+      if(target) smoothScrollTo(target);
+    }, {passive:false});
+  });
+  const sections = [...document.querySelectorAll('main section')];
+  const updateActive = () => {
+    let current = sections[0]?.id || '';
+    for(const s of sections){ if(s.getBoundingClientRect().top <= 90) current = s.id; }
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.target === current));
+  };
+  document.addEventListener('scroll', updateActive, {passive:true});
+  updateActive();
+}
+function setupPresenceButtons(){
+  const wrap = document.getElementById('presenceButtons');
+  const order = ['modelA','dimension','priority','level'];
+  wrap.innerHTML = order.map(id => `<button type="button" data-mode="${esc(id)}">${esc(blockModes[id].label)}</button>`).join('');
+  wrap.querySelectorAll('[data-mode]').forEach(btn => btn.addEventListener('click', () => renderPresence(btn.dataset.mode)));
+}
+function renderPresence(modeId='modelA'){
+  const m = blockModes[modeId];
+  document.querySelectorAll('[data-mode]').forEach(btn => btn.classList.toggle('active', btn.dataset.mode===modeId));
+  const activeNodes = new Set();
+  m.items.forEach(item => (item.pair || item.nodes || []).forEach(n => activeNodes.add(n)));
+
+  let svg = `<svg viewBox="0 0 420 500" role="img" aria-label="${esc(m.title)} Presence Cube view" xmlns="http://www.w3.org/2000/svg">`;
+  svg += `<defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="softGlow"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>`;
+
+  // Level bracket: kept off the geometry so the cube stays optically straight instead of grid-skewed.
+  svg += `<text x="238" y="16" fill="#7d879f" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" font-weight="900" letter-spacing="1.6">4L · PRESENCE PEAK</text>`;
+  svg += `<text x="238" y="497" fill="#7d879f" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" font-weight="900" letter-spacing="1.6">1L · PRESENCE FLOOR</text>`;
+  svg += `<line x1="38" y1="${levelGuides[0].y}" x2="38" y2="${levelGuides[3].y}" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="3,6"/>`;
+  levelGuides.forEach(g => {
+    svg += `<line x1="32" y1="${g.y}" x2="46" y2="${g.y}" stroke="rgba(255,255,255,.16)" stroke-width="1"/>`;
+    svg += `<text x="15" y="${g.y+4}" fill="#4b556c" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10">${g.label}</text>`;
+  });
+
+  // Structural shell: draw hidden rear edges first, then the solid visible cube edges.
+  // Hidden: 1+2, 2+5, 2+7. Solid: includes 3+6 and 3+8. No 2+3 edge is drawn.
+  cubeHiddenEdges.forEach(([a,b]) => svg += lineBetween(a,b,'stroke="rgba(255,255,255,.080)" stroke-width="1.35" stroke-dasharray="5,7"'));
+  cubeSolidEdges.forEach(([a,b]) => svg += lineBetween(a,b,'stroke="rgba(255,255,255,.135)" stroke-width="1.65"'));
+
+  if(modeId !== 'level'){
+    m.items.forEach(item => {
+      const [a,b] = item.pair;
+      const hidden = isHiddenEdge(a,b);
+      svg += lineBetween(a,b,`stroke="${m.color}" stroke-width="3.1" stroke-linecap="round" ${hidden ? 'stroke-dasharray="7,8" opacity=".88"' : ''} filter="url(#glow)"`);
+      const A=cubeCoords[a], B=cubeCoords[b];
+      const x=(A.x+B.x)/2 + (m.labelDx || 0);
+      const y=(A.y+B.y)/2 + (m.labelDy || 0);
+      const fs = modeId === 'modelA' ? 10 : 9;
+      const fw = modeId === 'modelA' ? 950 : 900;
+      svg += `<text x="${x}" y="${y}" fill="${m.color}" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="${fs}" font-weight="${fw}" paint-order="stroke" stroke="rgba(17,21,34,.95)" stroke-width="4" stroke-linejoin="round">${esc(item.name)}</text>`;
+    });  } else {
+    // Presence mode: keep the diagram clean and let the right-hand legend carry the level labels.
+  }
+
+  Object.entries(cubeCoords).forEach(([pos,pt]) => {
+    const n = Number(pos);
+    const r = pos==='1' || pos==='4' ? 22 : 18;
+    if(modeId === 'level'){
+      const lvl = nodePresenceLevel[n] || 1;
+      const op = nodeLevelOpacity[lvl] || .35;
+      svg += `<circle cx="${pt.x}" cy="${pt.y}" r="${r+10}" fill="rgba(211,166,255,${0.09*op})" filter="url(#softGlow)"/>`;
+      svg += `<circle cx="${pt.x}" cy="${pt.y}" r="${r}" fill="rgba(21,26,41,${0.62 + 0.20*op})" stroke="#d3a6ff" stroke-opacity="${0.22 + 0.78*op}" stroke-width="${1.25 + 1.55*op}"/>`;
+      svg += `<text x="${pt.x}" y="${pt.y+6}" fill="#f2f4fb" fill-opacity="${0.52 + 0.48*op}" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" font-weight="950">${pos}</text>`;
+    } else {
+      const active = activeNodes.has(n);
+      svg += `<circle cx="${pt.x}" cy="${pt.y}" r="${r+9}" fill="${active?'rgba(211,166,255,.075)':'transparent'}" filter="${active?'url(#softGlow)':''}"/>`;
+      svg += `<circle cx="${pt.x}" cy="${pt.y}" r="${r}" fill="#151a29" stroke="${active?m.color:'rgba(255,255,255,.22)'}" stroke-width="${active?2.7:1.4}"/>`;
+      svg += `<text x="${pt.x}" y="${pt.y+6}" fill="#f2f4fb" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" font-weight="950">${pos}</text>`;
+    }
+  });
+
+  svg += `</svg>`;
+  document.getElementById('presenceViz').innerHTML = svg;
+  document.getElementById('presenceInfo').innerHTML = `
+    <div class="modeTitle"><b>${esc(m.title)}</b><span>${esc(m.subtitle)}</span><p>${esc(m.modeNote)}</p></div>
+    ${m.items.map(item => `
+      <div class="blockChip">
+        <div class="code">${esc(item.code)}<br>${traitHTML(item.traits)}</div>
+        <div><b>${esc(item.name)}</b><p>${esc(item.desc)}</p></div>
+      </div>`).join('')}`;
+}
+renderLattice();
+selectElement('N?');
+setupNav();
+setupPresenceButtons();
+renderPresence('modelA');
+</script>
+
+
+</body></html>
